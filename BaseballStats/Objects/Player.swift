@@ -31,6 +31,11 @@ class Player {
     var lastInitial: String!
     var fullName: String!
     var formalName: String!
+    var displayName: String {
+        get {
+            return usesName + " " + lastName
+        }
+    }
     
     init(dictionary: [String: Any]) {
         playerID = dictionary["PlayerID"] as? Int

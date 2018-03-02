@@ -54,7 +54,7 @@ class FirstViewController: UIViewController, UISearchBarDelegate, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let playerCell = tableView.dequeueReusableCell(withIdentifier: "playerCell")
         let player = players[indexPath.row]
-        playerCell?.textLabel?.text = player.fullName
+        playerCell?.textLabel?.text = player.displayName
         return playerCell!
     }
     
