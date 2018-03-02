@@ -9,8 +9,9 @@
 import UIKit
 
 class PlayerRetrievalUtility: NSObject {
+    let baseURL = "https://jobposting28.azurewebsites.net/api/"
     func getPlayersWith(searchParameter: String, completionBlock: @escaping ([Player]) -> Void) {
-        let urlString = "https://jobposting28.azurewebsites.net/api/player?criteria=\(searchParameter)"
+        let urlString = "\(baseURL)player?criteria=\(searchParameter)"
         if let url = URL(string: urlString) {
             let session = URLSession.shared
             let sessionTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
@@ -31,6 +32,35 @@ class PlayerRetrievalUtility: NSObject {
                 }
             })
             sessionTask.resume()
+        }
+    }
+    
+    func getStats(for player: Player, completionBlock: @escaping ([BattingStats]) -> Void) {
+        if let playerID = player.playerID {
+            let urlString = "\(baseURL)player/\(playerID)/stats"
+            if let url = URL(string: urlString) {
+                let session = URLSession.shared
+                let sessionTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+                    if let responseData = data {
+                        do {
+                            if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] {
+                                if let battingStatsArray = jsonDict["Batting"] as? [[String: Any]] {
+                                    var allBattingStats = [BattingStats]()
+                                    for battingStatsDict in battingStatsArray {
+                                        allBattingStats.append(BattingStats(dictionary: battingStatsDict))
+                                    }
+                                    completionBlock(allBattingStats)
+                                }
+                            }
+                        } catch let jsonError {
+                            print(jsonError)
+                        }
+                    } else if let responseError = error {
+                        print(responseError)
+                    }
+                })
+                sessionTask.resume()
+            }
         }
     }
 }

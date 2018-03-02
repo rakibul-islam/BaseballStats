@@ -52,6 +52,8 @@ class FirstViewController: UIViewController, UISearchBarDelegate, UITableViewDel
     
     //MARK: - UITableView delegate methods
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        playerRetrievalUtility.getStats(for: players[indexPath.row]) { (battingStats) in
+            
+        }
     }
 }
