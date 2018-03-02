@@ -20,15 +20,6 @@ class FirstViewController: UIViewController, UISearchBarDelegate, UITableViewDel
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
     
     //MARK: - UISearchBar delegate methods
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -55,6 +46,7 @@ class FirstViewController: UIViewController, UISearchBarDelegate, UITableViewDel
         let playerCell = tableView.dequeueReusableCell(withIdentifier: "playerCell")
         let player = players[indexPath.row]
         playerCell?.textLabel?.text = player.displayName
+        playerCell?.detailTextLabel?.text = player.positionName
         return playerCell!
     }
     

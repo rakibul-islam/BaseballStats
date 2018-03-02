@@ -36,6 +36,33 @@ class Player {
             return usesName + " " + lastName
         }
     }
+    var positionName: String {
+        get {
+            switch position {
+            case 1:
+                return "Pitcher"
+            case 2:
+                return "Catcher"
+            case 3:
+                return "First Base"
+            case 4:
+                return "Second Base"
+            case 5:
+                return "Third Base"
+            case 6:
+                return "Shortstop"
+            case 7:
+                return "Left Field"
+            case 8:
+                return "Center Field"
+            case 9:
+                return "Right Field"
+            default:
+                return "Unknown"
+            }
+        }
+    }
+    
     
     init(dictionary: [String: Any]) {
         playerID = dictionary["PlayerID"] as? Int
