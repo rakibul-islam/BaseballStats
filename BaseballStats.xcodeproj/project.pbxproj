@@ -8,14 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		F233F4C02048F31D008AD38E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233F4BF2048F31D008AD38E /* Player.swift */; };
+		F264E531204902E30032ABDE /* BattingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264E530204902E30032ABDE /* BattingStats.swift */; };
+		F272293D204A1B9F00597B37 /* PlayerStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */; };
 		F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */; };
-		F2E2EB5E2048DA2D00DA213A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5D2048DA2D00DA213A /* FirstViewController.swift */; };
+		F2E2EB5E2048DA2D00DA213A /* PlayerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5D2048DA2D00DA213A /* PlayerSearchViewController.swift */; };
 		F2E2EB602048DA2D00DA213A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5F2048DA2D00DA213A /* SecondViewController.swift */; };
 		F2E2EB632048DA2D00DA213A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E2EB612048DA2D00DA213A /* Main.storyboard */; };
 		F2E2EB652048DA2D00DA213A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E2EB642048DA2D00DA213A /* Assets.xcassets */; };
 		F2E2EB682048DA2D00DA213A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E2EB662048DA2D00DA213A /* LaunchScreen.storyboard */; };
 		F2E2EB732048DA2D00DA213A /* BaseballStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB722048DA2D00DA213A /* BaseballStatsTests.swift */; };
 		F2E2EB812048E1EE00DA213A /* PlayerRetrievalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB802048E1EE00DA213A /* PlayerRetrievalUtility.swift */; };
+		F2FA65F1204A62F7001C93EB /* PitchingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA65F0204A62F7001C93EB /* PitchingStats.swift */; };
+		F2FA65F3204A6366001C93EB /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA65F2204A6366001C93EB /* PlayerStat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,9 +34,11 @@
 
 /* Begin PBXFileReference section */
 		F233F4BF2048F31D008AD38E /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		F264E530204902E30032ABDE /* BattingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattingStats.swift; sourceTree = "<group>"; };
+		F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsViewController.swift; sourceTree = "<group>"; };
 		F2E2EB582048DA2D00DA213A /* BaseballStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F2E2EB5D2048DA2D00DA213A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		F2E2EB5D2048DA2D00DA213A /* PlayerSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSearchViewController.swift; sourceTree = "<group>"; };
 		F2E2EB5F2048DA2D00DA213A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		F2E2EB622048DA2D00DA213A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F2E2EB642048DA2D00DA213A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +48,8 @@
 		F2E2EB722048DA2D00DA213A /* BaseballStatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballStatsTests.swift; sourceTree = "<group>"; };
 		F2E2EB742048DA2D00DA213A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2E2EB802048E1EE00DA213A /* PlayerRetrievalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRetrievalUtility.swift; sourceTree = "<group>"; };
+		F2FA65F0204A62F7001C93EB /* PitchingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingStats.swift; sourceTree = "<group>"; };
+		F2FA65F2204A6366001C93EB /* PlayerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +74,21 @@
 			isa = PBXGroup;
 			children = (
 				F233F4BF2048F31D008AD38E /* Player.swift */,
+				F264E530204902E30032ABDE /* BattingStats.swift */,
+				F2FA65F0204A62F7001C93EB /* PitchingStats.swift */,
+				F2FA65F2204A6366001C93EB /* PlayerStat.swift */,
 			);
 			path = Objects;
+			sourceTree = "<group>";
+		};
+		F272293B204A1B7C00597B37 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F2E2EB5D2048DA2D00DA213A /* PlayerSearchViewController.swift */,
+				F2E2EB5F2048DA2D00DA213A /* SecondViewController.swift */,
+				F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		F2E2EB4F2048DA2D00DA213A = {
@@ -91,10 +112,9 @@
 		F2E2EB5A2048DA2D00DA213A /* BaseballStats */ = {
 			isa = PBXGroup;
 			children = (
+				F272293B204A1B7C00597B37 /* View Controllers */,
 				F233F4BE2048F31D008AD38E /* Objects */,
 				F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */,
-				F2E2EB5D2048DA2D00DA213A /* FirstViewController.swift */,
-				F2E2EB5F2048DA2D00DA213A /* SecondViewController.swift */,
 				F2E2EB612048DA2D00DA213A /* Main.storyboard */,
 				F2E2EB642048DA2D00DA213A /* Assets.xcassets */,
 				F2E2EB662048DA2D00DA213A /* LaunchScreen.storyboard */,
@@ -216,11 +236,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F272293D204A1B9F00597B37 /* PlayerStatsViewController.swift in Sources */,
 				F2E2EB602048DA2D00DA213A /* SecondViewController.swift in Sources */,
+				F2FA65F3204A6366001C93EB /* PlayerStat.swift in Sources */,
+				F264E531204902E30032ABDE /* BattingStats.swift in Sources */,
+				F2FA65F1204A62F7001C93EB /* PitchingStats.swift in Sources */,
 				F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */,
 				F2E2EB812048E1EE00DA213A /* PlayerRetrievalUtility.swift in Sources */,
 				F233F4C02048F31D008AD38E /* Player.swift in Sources */,
-				F2E2EB5E2048DA2D00DA213A /* FirstViewController.swift in Sources */,
+				F2E2EB5E2048DA2D00DA213A /* PlayerSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
