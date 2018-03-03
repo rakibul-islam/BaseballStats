@@ -13,7 +13,7 @@
         <!--Search-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="BaseballStats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="PlayerSearchViewController" customModule="BaseballStats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="playerCell" textLabel="2hg-LT-Oyn" detailTextLabel="yvt-XW-wzO" style="IBUITableViewCellStyleSubtitle" id="K0U-gQ-xTI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="playerCell" textLabel="2hg-LT-Oyn" detailTextLabel="yvt-XW-wzO" style="IBUITableViewCellStyleSubtitle" id="K0U-gQ-xTI">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K0U-gQ-xTI" id="0bO-LA-vwG">
@@ -418,11 +418,11 @@
             </objects>
             <point key="canvasLocation" x="2240.8000000000002" y="-313.49325337331339"/>
         </scene>
-        <!--First-->
+        <!--Search-->
         <scene sceneID="E1i-OR-a2M">
             <objects>
                 <navigationController id="WfL-kY-D2P" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="yTa-dC-q90"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="first" id="yTa-dC-q90"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oW5-OU-shV">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
