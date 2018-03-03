@@ -10,6 +10,7 @@ import UIKit
 
 class Player {
     var battingStats: [BattingStats]?
+    var pitchingStats: [PitchingStats]?
     var playerID: Int?
     var lastName: String!
     var firstName: String!
