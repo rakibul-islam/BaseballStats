@@ -56,6 +56,8 @@ class PitchingStats: PlayerStat {
         }
     }
     
+    //MARK: - ViewModel methods
+    
     var eraString: String {
         get {
             return numberFormatter.string(from: NSNumber(value: era)) ?? ""
