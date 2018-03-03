@@ -17,7 +17,7 @@ class Player {
     var middleName: String?
     var bats: Int!
     var throwsWith: Int!
-    var teamID: Int!
+    var teamID: Int?
     var birthDate: Date!
     var birthCity: String!
     var birthCountry: String!

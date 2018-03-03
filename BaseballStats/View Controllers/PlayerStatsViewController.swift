@@ -23,6 +23,7 @@ class PlayerStatsViewController: UIViewController {
         // Do any additional setup after loading the view.
         nameLabel.text = player?.displayName
         positionLabel.text = player?.positionName
+        teamNumberLabel.text = "#\(player?.number ?? 0) - \(player?.teamID ?? 0)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,11 +45,21 @@ class PlayerStatsViewController: UIViewController {
     }
     
     func getStatsForPlayer() {
+        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
+        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            URLSession.shared.invalidateAndCancel()
+        }))
+        present(loadingController, animated: true, completion: nil)
         if let playerID = player?.playerID {
             playerRetrievalUtility.getStats(for: playerID, completionBlock: { (battingStats) in
                 self.player?.battingStats = battingStats
                 DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: nil)
                     self.displayStats()
+                }
+            }, failureBlock: { (error) in
+                DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: nil)
                 }
             })
         }

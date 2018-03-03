@@ -10,7 +10,7 @@ import UIKit
 
 class PlayerRetrievalUtility: NSObject {
     let baseURL = "https://jobposting28.azurewebsites.net/api/"
-    func getPlayersWith(searchParameter: String, completionBlock: @escaping ([Player]) -> Void) {
+    func getPlayersWith(searchParameter: String, completionBlock: @escaping ([Player]) -> Void, failureBlock: @escaping (Error) -> Void) {
         let urlString = "\(baseURL)player?criteria=\(searchParameter)"
         if let url = URL(string: urlString) {
             let session = URLSession.shared
@@ -25,17 +25,17 @@ class PlayerRetrievalUtility: NSObject {
                             completionBlock(players)
                         }
                     } catch let jsonError {
-                        print(jsonError)
+                        failureBlock(jsonError)
                     }
                 } else if let responseError = error {
-                    print(responseError)
+                    failureBlock(responseError)
                 }
             })
             sessionTask.resume()
         }
     }
     
-    func getStats(for player: Int?, completionBlock: @escaping ([BattingStats]) -> Void) {
+    func getStats(for player: Int?, completionBlock: @escaping ([BattingStats]) -> Void, failureBlock: @escaping (Error) -> Void) {
         if let playerID = player {
             let urlString = "\(baseURL)player/\(playerID)/stats"
             if let url = URL(string: urlString) {
@@ -53,10 +53,10 @@ class PlayerRetrievalUtility: NSObject {
                                 }
                             }
                         } catch let jsonError {
-                            print(jsonError)
+                            failureBlock(jsonError)
                         }
                     } else if let responseError = error {
-                        print(responseError)
+                        failureBlock(responseError)
                     }
                 })
                 sessionTask.resume()

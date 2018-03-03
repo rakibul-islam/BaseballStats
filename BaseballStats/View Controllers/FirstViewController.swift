@@ -33,10 +33,20 @@ class FirstViewController: UIViewController, UISearchBarDelegate, UITableViewDel
     //MARK: - UISearchBar delegate methods
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
+            let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
+            loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                URLSession.shared.invalidateAndCancel()
+            }))
+            present(loadingController, animated: true, completion: nil)
             playerRetrievalUtility.getPlayersWith(searchParameter: searchText, completionBlock: { (players) in
                 self.players = players
                 DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: nil)
                     self.tableView.reloadData()
+                }
+            }, failureBlock: { (error) in
+                DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: nil)
                 }
             })
         }
