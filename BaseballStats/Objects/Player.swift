@@ -27,7 +27,7 @@ class Player {
     var position: Int!
     var number: Int?
     var headShotURL: String?
-    var isPitcher: Bool!
+    var isPitcher: Bool
     var firstInitial: String!
     var lastInitial: String!
     var fullName: String!

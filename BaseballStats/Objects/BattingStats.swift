@@ -12,10 +12,10 @@ class BattingStats {
     var numberFormatter = NumberFormatter()
     
     var playerID: Int!
-    var yearID: Int!
+    var yearID: Int
     var levelID: Int!
     var teamID: Int!
-    var games: Int!
+    var games: Int
     var atBats: Int
     var singles: Int
     var doubles: Int
@@ -24,7 +24,7 @@ class BattingStats {
     var walksRegular: Int
     var walksIntentional: Int
     var hitByPitch: Int
-    var strikeouts: Int!
+    var strikeouts: Int
     var sacrificeHits: Int!
     var sacrificeFlies: Int
     var stolenBases: Int!
@@ -35,10 +35,10 @@ class BattingStats {
     
     init(dictionary: [String: Any]) {
         playerID = dictionary["PlayerID"] as? Int
-        yearID = dictionary["YearID"] as? Int
+        yearID = dictionary["YearID"] as? Int ?? 0
         levelID = dictionary["LevelID"] as? Int
         teamID = dictionary["TeamID"] as? Int
-        games = dictionary["G"] as? Int
+        games = dictionary["G"] as? Int ?? 0
         atBats = dictionary["AB"] as? Int ?? 0
         singles = dictionary["B1"] as? Int ?? 0
         doubles = dictionary["B2"] as? Int ?? 0
@@ -47,7 +47,7 @@ class BattingStats {
         walksRegular = dictionary["UBB"] as? Int ?? 0
         walksIntentional = dictionary["IBB"] as? Int ?? 0
         hitByPitch = dictionary["HBP"] as? Int ?? 0
-        strikeouts = dictionary["SO"] as? Int
+        strikeouts = dictionary["SO"] as? Int ?? 0
         sacrificeHits = dictionary["SH"] as? Int
         sacrificeFlies = dictionary["SF"] as? Int ?? 0
         stolenBases = dictionary["SB"] as? Int
@@ -59,6 +59,8 @@ class BattingStats {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 3
         numberFormatter.minimumFractionDigits = 3
+        numberFormatter.minimumIntegerDigits = 0
+        numberFormatter.maximumIntegerDigits = 1
     }
     
     //MARK: - Calculated values

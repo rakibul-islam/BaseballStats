@@ -49,6 +49,9 @@ class PlayerRetrievalUtility: NSObject {
                                     for battingStatsDict in battingStatsArray {
                                         allBattingStats.append(BattingStats(dictionary: battingStatsDict))
                                     }
+                                    allBattingStats = allBattingStats.sorted(by: { (stat1, stat2) -> Bool in
+                                        return stat1.yearID > stat2.yearID
+                                    })
                                     completionBlock(allBattingStats)
                                 }
                             }
