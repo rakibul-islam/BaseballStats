@@ -24,6 +24,11 @@ class PlayerStatsViewController: UIViewController {
         nameLabel.text = player?.displayName
         positionLabel.text = player?.positionName
         teamNumberLabel.text = "#\(player?.number ?? 0) - \(player?.teamID ?? 0)"
+        playerRetrievalUtility.loadImageFrom(urlString: player?.headShotURL) { (image) in
+            DispatchQueue.main.async {
+                self.headshotImageView.image = image
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

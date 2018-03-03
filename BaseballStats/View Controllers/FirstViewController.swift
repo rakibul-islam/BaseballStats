@@ -33,6 +33,7 @@ class FirstViewController: UIViewController, UISearchBarDelegate, UITableViewDel
     //MARK: - UISearchBar delegate methods
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
+            resignFirstResponder()
             let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
             loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
                 URLSession.shared.invalidateAndCancel()

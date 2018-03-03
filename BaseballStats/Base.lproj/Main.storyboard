@@ -100,15 +100,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gea-Yh-OeS">
-                                <rect key="frame" x="16" y="80" width="80" height="80"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gea-Yh-OeS">
+                                <rect key="frame" x="16" y="80" width="90" height="135"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="EFI-6v-ahC"/>
-                                    <constraint firstAttribute="height" constant="80" id="SgN-jb-x4G"/>
+                                    <constraint firstAttribute="width" constant="90" id="EFI-6v-ahC"/>
+                                    <constraint firstAttribute="height" constant="135" id="SgN-jb-x4G"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXZ-LC-zYh">
-                                <rect key="frame" x="104" y="80" width="255" height="28"/>
+                                <rect key="frame" x="114" y="80" width="245" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="YQj-1a-vEJ"/>
                                 </constraints>
@@ -117,7 +117,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfZ-Gg-pyE">
-                                <rect key="frame" x="104" y="110" width="255" height="24"/>
+                                <rect key="frame" x="114" y="110" width="245" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="jrW-NI-faE"/>
                                 </constraints>
@@ -126,7 +126,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name and Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikQ-SO-2kb">
-                                <rect key="frame" x="104" y="136" width="255" height="24"/>
+                                <rect key="frame" x="114" y="136" width="245" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Gq7-iH-AXt"/>
                                 </constraints>

@@ -63,4 +63,19 @@ class PlayerRetrievalUtility: NSObject {
             }
         }
     }
+    
+    
+    
+    func loadImageFrom(urlString: String?, completionHandler: @escaping (UIImage?) -> Void) {
+        if let string = urlString, let url = URL(string: string) {
+            let session = URLSession.shared
+            let sessionTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+                if let imageData = data {
+                    let image = UIImage(data: imageData)
+                    completionHandler(image)
+                }
+            })
+            sessionTask.resume()
+        }
+    }
 }
