@@ -9,30 +9,36 @@
 import UIKit
 
 class TeamRetrievalUtility {
+    let baseURL = "https://jobposting28.azurewebsites.net/api/team"
+    private var teams = [Team]()
+    
     static let sharedInstance = TeamRetrievalUtility()
     
-    let baseURL = "https://jobposting28.azurewebsites.net/api/team"
-    func getTeams(completionBlock: @escaping ([Team]) -> Void, failureBlock: @escaping (Error) -> Void) {
-        if let url = URL(string: baseURL) {
-            let session = URLSession.shared
-            let sessionTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
-                if let responseData = data {
-                    do {
-                        if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [[String: Any]] {
-                            var teams = [Team]()
-                            for teamDictionary in jsonDict {
-                                teams.append(Team(dictionary: teamDictionary))
+    func getTeamsFromAPI() {
+        if teams.count == 0 {
+            if let url = URL(string: baseURL) {
+                let session = URLSession.shared
+                let sessionTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+                    if let responseData = data {
+                        do {
+                            if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [[String: Any]] {
+                                for teamDictionary in jsonDict {
+                                    self.teams.append(Team(dictionary: teamDictionary))
+                                }
                             }
-                            completionBlock(teams)
+                        } catch let jsonError {
+                            print(jsonError)
                         }
-                    } catch let jsonError {
-                        failureBlock(jsonError)
+                    } else if let responseError = error {
+                        print(responseError)
                     }
-                } else if let responseError = error {
-                    failureBlock(responseError)
-                }
-            })
-            sessionTask.resume()
+                })
+                sessionTask.resume()
+            }
         }
+    }
+    
+    func getTeamList() -> [Team] {
+        return teams
     }
 }
