@@ -51,22 +51,12 @@ class PlayerStatsViewController: UIViewController {
                 headerLabels[index].text = headerTexts[index]
             }
         }
+        displayStats()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if let _ = player?.battingStats {
-            displayStats()
-        } else if let _ = player?.pitchingStats {
-            displayStats()
-        } else {
-            getStatsForPlayer()
-        }
     }
     
     func displayStats() {
@@ -115,27 +105,4 @@ class PlayerStatsViewController: UIViewController {
             }
         }
     }
-    
-    func getStatsForPlayer() {
-        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
-        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            URLSession.shared.invalidateAndCancel()
-        }))
-        present(loadingController, animated: true, completion: nil)
-        if let playerID = player?.playerID {
-            playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
-                self.player?.battingStats = battingStats
-                self.player?.pitchingStats = pitchingStats
-                DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: nil)
-                    self.displayStats()
-                }
-            }, failureBlock: { (error) in
-                DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: nil)
-                }
-            })
-        }
-    }
-
 }

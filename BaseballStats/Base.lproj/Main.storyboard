@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="playerCell" textLabel="2hg-LT-Oyn" detailTextLabel="yvt-XW-wzO" style="IBUITableViewCellStyleSubtitle" id="K0U-gQ-xTI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="playerCell" textLabel="2hg-LT-Oyn" detailTextLabel="yvt-XW-wzO" style="IBUITableViewCellStyleSubtitle" id="K0U-gQ-xTI">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K0U-gQ-xTI" id="0bO-LA-vwG">
@@ -59,9 +59,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="ERI-Is-TqD" kind="show" id="q19-Da-t9l"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -86,6 +83,7 @@
                     <connections>
                         <outlet property="searchBar" destination="DeS-PD-1vM" id="y4D-So-JzU"/>
                         <outlet property="tableView" destination="mRE-Ds-dbJ" id="ySM-z5-6Cc"/>
+                        <segue destination="ERI-Is-TqD" kind="show" identifier="showPlayerInfo" id="Tts-8s-wC2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>

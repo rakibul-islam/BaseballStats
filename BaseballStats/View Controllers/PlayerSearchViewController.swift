@@ -13,7 +13,7 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var players = [Player]()
-    var selectedIndexPath: IndexPath?
+    var selectedPlayer: Player?
     
     lazy var playerRetrievalUtility = PlayerRetrievalUtility()
 
@@ -24,9 +24,7 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let statsVC = segue.destination as? PlayerStatsViewController {
-            if let selectedCell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: selectedCell) {
-                statsVC.player = players[indexPath.row]
-            }
+            statsVC.player = selectedPlayer
         }
     }
     
@@ -87,4 +85,41 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     }
     
     //MARK: - UITableView delegate methods
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPlayer = players[indexPath.row]
+        if let _ = selectedPlayer?.battingStats {
+            performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+        } else if let _ = selectedPlayer?.pitchingStats {
+            performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+        } else {
+            getStatsForSelectedPlayer()
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    //MARK: - Other methods
+    func getStatsForSelectedPlayer() {
+        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
+        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            URLSession.shared.invalidateAndCancel()
+        }))
+        present(loadingController, animated: true, completion: nil)
+        if let playerID = selectedPlayer?.playerID {
+            playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
+                self.selectedPlayer?.battingStats = battingStats
+                self.selectedPlayer?.pitchingStats = pitchingStats
+                DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: {
+                        self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+                    })
+                }
+            }, failureBlock: { (error) in
+                DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: {
+                        self.showErrorAlert(error: nil)
+                    })
+                }
+            })
+        }
+    }
 }
