@@ -13,6 +13,9 @@ class PlayerStatsViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var teamNumberLabel: UILabel!
+    @IBOutlet weak var batsAndThrowsLabel: UILabel!
+    @IBOutlet weak var dateOfBirthLabel: UILabel!
+    @IBOutlet weak var heightWeightLabel: UILabel!
     
     var player: Player?
     
@@ -23,7 +26,10 @@ class PlayerStatsViewController: UIViewController {
         // Do any additional setup after loading the view.
         nameLabel.text = player?.displayName
         positionLabel.text = player?.positionName
-        teamNumberLabel.text = "#\(player?.number ?? 0) - \(player?.teamID ?? 0)"
+        teamNumberLabel.text = player?.teamAndNumber
+        batsAndThrowsLabel.text = player?.batsAndThrows
+        dateOfBirthLabel.text = player?.dateOfBirth
+        heightWeightLabel.text = player?.heightWeight
         playerRetrievalUtility.loadImageFrom(urlString: player?.headShotURL) { (image) in
             DispatchQueue.main.async {
                 self.headshotImageView.image = image
