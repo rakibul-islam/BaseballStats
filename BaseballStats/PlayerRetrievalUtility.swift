@@ -11,7 +11,8 @@ import UIKit
 class PlayerRetrievalUtility: NSObject {
     let baseURL = "https://jobposting28.azurewebsites.net/api/"
     func getPlayersWith(searchParameter: String, completionBlock: @escaping ([Player]) -> Void, failureBlock: @escaping (Error) -> Void) {
-        let urlString = "\(baseURL)player?criteria=\(searchParameter)"
+        let encodedStr = searchParameter.addingPercentEncoding(withAllowedCharacters: .letters) ?? searchParameter
+        let urlString = "\(baseURL)player?criteria=\(encodedStr)"
         if let url = URL(string: urlString) {
             let session = URLSession.shared
             let sessionTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
