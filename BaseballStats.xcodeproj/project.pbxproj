@@ -18,6 +18,8 @@
 		F2E2EB682048DA2D00DA213A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E2EB662048DA2D00DA213A /* LaunchScreen.storyboard */; };
 		F2E2EB732048DA2D00DA213A /* BaseballStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB722048DA2D00DA213A /* BaseballStatsTests.swift */; };
 		F2E2EB812048E1EE00DA213A /* PlayerRetrievalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB802048E1EE00DA213A /* PlayerRetrievalUtility.swift */; };
+		F2FA65F1204A62F7001C93EB /* PitchingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA65F0204A62F7001C93EB /* PitchingStats.swift */; };
+		F2FA65F3204A6366001C93EB /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA65F2204A6366001C93EB /* PlayerStat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		F2E2EB722048DA2D00DA213A /* BaseballStatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballStatsTests.swift; sourceTree = "<group>"; };
 		F2E2EB742048DA2D00DA213A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2E2EB802048E1EE00DA213A /* PlayerRetrievalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRetrievalUtility.swift; sourceTree = "<group>"; };
+		F2FA65F0204A62F7001C93EB /* PitchingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingStats.swift; sourceTree = "<group>"; };
+		F2FA65F2204A6366001C93EB /* PlayerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 			children = (
 				F233F4BF2048F31D008AD38E /* Player.swift */,
 				F264E530204902E30032ABDE /* BattingStats.swift */,
+				F2FA65F0204A62F7001C93EB /* PitchingStats.swift */,
+				F2FA65F2204A6366001C93EB /* PlayerStat.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -232,7 +238,9 @@
 			files = (
 				F272293D204A1B9F00597B37 /* PlayerStatsViewController.swift in Sources */,
 				F2E2EB602048DA2D00DA213A /* SecondViewController.swift in Sources */,
+				F2FA65F3204A6366001C93EB /* PlayerStat.swift in Sources */,
 				F264E531204902E30032ABDE /* BattingStats.swift in Sources */,
+				F2FA65F1204A62F7001C93EB /* PitchingStats.swift in Sources */,
 				F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */,
 				F2E2EB812048E1EE00DA213A /* PlayerRetrievalUtility.swift in Sources */,
 				F233F4C02048F31D008AD38E /* Player.swift in Sources */,

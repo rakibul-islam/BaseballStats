@@ -35,7 +35,7 @@ class PlayerRetrievalUtility: NSObject {
         }
     }
     
-    func getStats(for player: Int?, completionBlock: @escaping ([BattingStats]) -> Void, failureBlock: @escaping (Error) -> Void) {
+    func getStats(for player: Int?, completionBlock: @escaping ([BattingStats], [PitchingStats]) -> Void, failureBlock: @escaping (Error) -> Void) {
         if let playerID = player {
             let urlString = "\(baseURL)player/\(playerID)/stats"
             if let url = URL(string: urlString) {
@@ -44,16 +44,25 @@ class PlayerRetrievalUtility: NSObject {
                     if let responseData = data {
                         do {
                             if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] {
+                                var allBattingStats = [BattingStats]()
                                 if let battingStatsArray = jsonDict["Batting"] as? [[String: Any]] {
-                                    var allBattingStats = [BattingStats]()
                                     for battingStatsDict in battingStatsArray {
                                         allBattingStats.append(BattingStats(dictionary: battingStatsDict))
                                     }
                                     allBattingStats = allBattingStats.sorted(by: { (stat1, stat2) -> Bool in
                                         return stat1.yearID > stat2.yearID
                                     })
-                                    completionBlock(allBattingStats)
                                 }
+                                var allPitchingStats = [PitchingStats]()
+                                if let pitchingStatsArray = jsonDict["Pitching"] as? [[String: Any]] {
+                                    for pitchingStatsDict in pitchingStatsArray {
+                                        allPitchingStats.append(PitchingStats(dictionary: pitchingStatsDict))
+                                    }
+                                    allPitchingStats = allPitchingStats.sorted(by: { (stat1, stat2) -> Bool in
+                                        return stat1.yearID > stat2.yearID
+                                    })
+                                }
+                                completionBlock(allBattingStats, allPitchingStats)
                             }
                         } catch let jsonError {
                             failureBlock(jsonError)
