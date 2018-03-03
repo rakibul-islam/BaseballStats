@@ -35,8 +35,8 @@ class PlayerRetrievalUtility: NSObject {
         }
     }
     
-    func getStats(for player: Player, completionBlock: @escaping ([BattingStats]) -> Void) {
-        if let playerID = player.playerID {
+    func getStats(for player: Int?, completionBlock: @escaping ([BattingStats]) -> Void) {
+        if let playerID = player {
             let urlString = "\(baseURL)player/\(playerID)/stats"
             if let url = URL(string: urlString) {
                 let session = URLSession.shared

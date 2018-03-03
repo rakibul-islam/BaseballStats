@@ -59,6 +59,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ERI-Is-TqD" kind="show" id="q19-Da-t9l"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -87,7 +90,77 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+            <point key="canvasLocation" x="1486" y="-313"/>
+        </scene>
+        <!--Player Stats View Controller-->
+        <scene sceneID="FDH-62-izB">
+            <objects>
+                <viewController id="ERI-Is-TqD" customClass="PlayerStatsViewController" customModule="BaseballStats" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3pc-Mj-QNF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gea-Yh-OeS">
+                                <rect key="frame" x="16" y="80" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="EFI-6v-ahC"/>
+                                    <constraint firstAttribute="height" constant="80" id="SgN-jb-x4G"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXZ-LC-zYh">
+                                <rect key="frame" x="104" y="80" width="255" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="YQj-1a-vEJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfZ-Gg-pyE">
+                                <rect key="frame" x="104" y="110" width="255" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="jrW-NI-faE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name and Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikQ-SO-2kb">
+                                <rect key="frame" x="104" y="136" width="255" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Gq7-iH-AXt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Gea-Yh-OeS" firstAttribute="top" secondItem="eMj-5I-Wxc" secondAttribute="top" constant="16" id="6tT-Ud-yqO"/>
+                            <constraint firstItem="eMj-5I-Wxc" firstAttribute="trailing" secondItem="ikQ-SO-2kb" secondAttribute="trailing" constant="16" id="86W-Tk-m58"/>
+                            <constraint firstItem="LXZ-LC-zYh" firstAttribute="leading" secondItem="Gea-Yh-OeS" secondAttribute="trailing" constant="8" id="Av3-2y-vtl"/>
+                            <constraint firstItem="Gea-Yh-OeS" firstAttribute="leading" secondItem="eMj-5I-Wxc" secondAttribute="leading" constant="16" id="OgB-QX-oO0"/>
+                            <constraint firstItem="LXZ-LC-zYh" firstAttribute="top" secondItem="eMj-5I-Wxc" secondAttribute="top" constant="16" id="bKZ-Tf-b2v"/>
+                            <constraint firstItem="eMj-5I-Wxc" firstAttribute="trailing" secondItem="LXZ-LC-zYh" secondAttribute="trailing" constant="16" id="pAR-4x-jzI"/>
+                            <constraint firstItem="zfZ-Gg-pyE" firstAttribute="leading" secondItem="Gea-Yh-OeS" secondAttribute="trailing" constant="8" id="qXg-rN-g8W"/>
+                            <constraint firstItem="ikQ-SO-2kb" firstAttribute="top" secondItem="zfZ-Gg-pyE" secondAttribute="bottom" constant="2" id="u36-mO-Vel"/>
+                            <constraint firstItem="zfZ-Gg-pyE" firstAttribute="top" secondItem="LXZ-LC-zYh" secondAttribute="bottom" constant="2" id="wWy-Td-plQ"/>
+                            <constraint firstItem="eMj-5I-Wxc" firstAttribute="trailing" secondItem="zfZ-Gg-pyE" secondAttribute="trailing" constant="16" id="xkT-24-RDg"/>
+                            <constraint firstItem="ikQ-SO-2kb" firstAttribute="leading" secondItem="Gea-Yh-OeS" secondAttribute="trailing" constant="8" id="y11-1M-uJY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eMj-5I-Wxc"/>
+                    </view>
+                    <connections>
+                        <outlet property="headshotImageView" destination="Gea-Yh-OeS" id="OJR-K9-qrK"/>
+                        <outlet property="nameLabel" destination="LXZ-LC-zYh" id="dmc-yf-B55"/>
+                        <outlet property="positionLabel" destination="zfZ-Gg-pyE" id="e7j-rB-FT8"/>
+                        <outlet property="teamNumberLabel" destination="ikQ-SO-2kb" id="X0F-Dg-EzE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ud-1I-Mdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2240.8000000000002" y="-313.49325337331339"/>
         </scene>
         <!--First-->
         <scene sceneID="E1i-OR-a2M">
@@ -104,7 +177,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hP9-ZC-1MY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-1045"/>
+            <point key="canvasLocation" x="750" y="-313"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">

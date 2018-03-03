@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F233F4C02048F31D008AD38E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233F4BF2048F31D008AD38E /* Player.swift */; };
 		F264E531204902E30032ABDE /* BattingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264E530204902E30032ABDE /* BattingStats.swift */; };
+		F272293D204A1B9F00597B37 /* PlayerStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */; };
 		F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */; };
 		F2E2EB5E2048DA2D00DA213A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5D2048DA2D00DA213A /* FirstViewController.swift */; };
 		F2E2EB602048DA2D00DA213A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5F2048DA2D00DA213A /* SecondViewController.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		F233F4BF2048F31D008AD38E /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F264E530204902E30032ABDE /* BattingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattingStats.swift; sourceTree = "<group>"; };
+		F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsViewController.swift; sourceTree = "<group>"; };
 		F2E2EB582048DA2D00DA213A /* BaseballStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2E2EB5D2048DA2D00DA213A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,16 @@
 			path = Objects;
 			sourceTree = "<group>";
 		};
+		F272293B204A1B7C00597B37 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F2E2EB5D2048DA2D00DA213A /* FirstViewController.swift */,
+				F2E2EB5F2048DA2D00DA213A /* SecondViewController.swift */,
+				F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		F2E2EB4F2048DA2D00DA213A = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +106,9 @@
 		F2E2EB5A2048DA2D00DA213A /* BaseballStats */ = {
 			isa = PBXGroup;
 			children = (
+				F272293B204A1B7C00597B37 /* View Controllers */,
 				F233F4BE2048F31D008AD38E /* Objects */,
 				F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */,
-				F2E2EB5D2048DA2D00DA213A /* FirstViewController.swift */,
-				F2E2EB5F2048DA2D00DA213A /* SecondViewController.swift */,
 				F2E2EB612048DA2D00DA213A /* Main.storyboard */,
 				F2E2EB642048DA2D00DA213A /* Assets.xcassets */,
 				F2E2EB662048DA2D00DA213A /* LaunchScreen.storyboard */,
@@ -219,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F272293D204A1B9F00597B37 /* PlayerStatsViewController.swift in Sources */,
 				F2E2EB602048DA2D00DA213A /* SecondViewController.swift in Sources */,
 				F264E531204902E30032ABDE /* BattingStats.swift in Sources */,
 				F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */,

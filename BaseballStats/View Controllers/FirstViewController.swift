@@ -13,12 +13,21 @@ class FirstViewController: UIViewController, UISearchBarDelegate, UITableViewDel
     @IBOutlet weak var tableView: UITableView!
     
     var players = [Player]()
+    var selectedIndexPath: IndexPath?
     
     lazy var playerRetrievalUtility = PlayerRetrievalUtility()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let statsVC = segue.destination as? PlayerStatsViewController {
+            if let selectedCell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: selectedCell) {
+                statsVC.player = players[indexPath.row]
+            }
+        }
     }
     
     //MARK: - UISearchBar delegate methods
@@ -51,9 +60,4 @@ class FirstViewController: UIViewController, UISearchBarDelegate, UITableViewDel
     }
     
     //MARK: - UITableView delegate methods
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        playerRetrievalUtility.getStats(for: players[indexPath.row]) { (battingStats) in
-            
-        }
-    }
 }
