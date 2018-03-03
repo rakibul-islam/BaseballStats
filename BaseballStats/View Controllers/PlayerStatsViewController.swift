@@ -16,6 +16,8 @@ class PlayerStatsViewController: UIViewController {
     
     var player: Player?
     
+    lazy var playerRetrievalUtility = PlayerRetrievalUtility()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -28,15 +30,28 @@ class PlayerStatsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let _ = player?.battingStats {
+            displayStats()
+        } else {
+            getStatsForPlayer()
+        }
     }
-    */
+    
+    func displayStats() {
+        //TODO: display stats
+    }
+    
+    func getStatsForPlayer() {
+        if let playerID = player?.playerID {
+            playerRetrievalUtility.getStats(for: playerID, completionBlock: { (battingStats) in
+                self.player?.battingStats = battingStats
+                DispatchQueue.main.async {
+                    self.displayStats()
+                }
+            })
+        }
+    }
 
 }
