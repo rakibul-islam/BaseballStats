@@ -14,13 +14,13 @@ class PlayerStatsViewController: UIViewController {
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var teamNumberLabel: UILabel!
     
-    var player: Player!
+    var player: Player?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        nameLabel.text = player.displayName
-        positionLabel.text = player.positionName
+        nameLabel.text = player?.displayName
+        positionLabel.text = player?.positionName
     }
 
     override func didReceiveMemoryWarning() {
