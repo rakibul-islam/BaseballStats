@@ -24,6 +24,7 @@ class PlayerStatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        title = "Player Info"
         nameLabel.text = player?.displayName
         positionLabel.text = player?.positionName
         teamNumberLabel.text = player?.teamAndNumber
