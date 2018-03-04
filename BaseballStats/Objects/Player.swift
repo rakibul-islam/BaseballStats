@@ -44,7 +44,6 @@ class Player {
         bats = dictionary["Bats"] as? Int
         throwsWith = dictionary["Throws"] as? Int
         teamID = dictionary["TeamID"] as? Int
-        team = TeamRetrievalUtility.sharedInstance.getTeamForId(teamID: teamID)
         if let date = dictionary["BirthDate"] as? String {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

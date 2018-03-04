@@ -21,7 +21,9 @@ class PlayerRetrievalUtility: NSObject {
                         if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [[String: Any]] {
                             var players = [Player]()
                             for playerDictionary in jsonDict {
-                                players.append(Player(dictionary: playerDictionary))
+                                let player = Player(dictionary: playerDictionary)
+                                player.team = TeamRetrievalUtility.sharedInstance.getTeamForId(teamID: player.teamID)
+                                players.append(player)
                             }
                             completionBlock(players)
                         }
