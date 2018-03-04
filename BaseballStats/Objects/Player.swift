@@ -115,7 +115,7 @@ class Player {
         get {
             let batting = bats == 1 ? "R" : bats == 2 ? "L" : "S"
             let throwing = throwsWith == 1 ? "R" : "L"
-            return "Bats: \(batting)  Throws: \(throwing)"
+            return isPitcher ? "Throws: \(throwing)  Bats: \(batting)" : "Bats: \(batting)  Throws: \(throwing)"
         }
     }
     var dateOfBirth: String {
