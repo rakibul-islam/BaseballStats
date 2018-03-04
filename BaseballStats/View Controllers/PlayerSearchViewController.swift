@@ -30,8 +30,8 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     
     //MARK: - UISearchBar delegate methods
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text {
-            searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
+        if let searchText = searchBar.text, searchText.count > 3 {
             CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
             playerRetrievalUtility.getPlayersWith(searchParameter: searchText, completionBlock: { (players) in
                 self.players = players
@@ -50,6 +50,8 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
                     })
                 }
             })
+        } else {
+            CommonAlerts.showErrorAlertOn(viewController: self, messageString: "Please enter a search term of at least 4 characters.", error: nil)
         }
     }
     
