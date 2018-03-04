@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NumberFormatters: NSObject {
+class NumberFormatters {
     static let battingNumberFormatter = NumberFormatter()
     static let pitchingNumberFormatter = NumberFormatter()
     
