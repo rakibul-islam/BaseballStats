@@ -58,23 +58,19 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - Other methods
     func getStatsForSelectedPlayer() {
-        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
-        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            URLSession.shared.invalidateAndCancel()
-        }))
-        present(loadingController, animated: true, completion: nil)
+        LoadingAlert.sharedInstance.showAlertOn(viewController: self)
         if let playerID = selectedPlayer?.playerID {
             playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
                 self.selectedPlayer?.battingStats = battingStats
                 self.selectedPlayer?.pitchingStats = pitchingStats
                 DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: {
+                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
                         self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
                     })
                 }
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: {
+                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
                         self.showErrorAlert(error: error)
                     })
                 }

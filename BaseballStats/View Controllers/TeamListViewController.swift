@@ -25,13 +25,9 @@ class TeamListViewController: UITableViewController {
     }
 
     func getListOfTeams() {
-        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
-        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            URLSession.shared.invalidateAndCancel()
-        }))
-        present(loadingController, animated: true, completion: nil)
+        LoadingAlert.sharedInstance.showAlertOn(viewController: self)
         TeamRetrievalUtility.sharedInstance.getTeams { (teams) in
-            loadingController.dismiss(animated: true, completion: {
+            LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
                 self.teams = teams
                 self.tableView.reloadData()
             })
@@ -72,21 +68,17 @@ class TeamListViewController: UITableViewController {
         if let _ = team.roster {
             self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
         } else {
-            let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
-            loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                URLSession.shared.invalidateAndCancel()
-            }))
-            present(loadingController, animated: true, completion: nil)
+            LoadingAlert.sharedInstance.showAlertOn(viewController: self)
             TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { (players) in
                 DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: {
+                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
                         team.roster = players
                         self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
                     })
                 }
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: {
+                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
                         self.showErrorAlert(error: error)
                     })
                 }

@@ -70,6 +70,8 @@ class PlayerStatsViewController: UIViewController {
             }
             yearSegmentedControl.selectedSegmentIndex = 0
             segmentedControlValueChanged(yearSegmentedControl)
+        } else {
+            yearSegmentedControl.isHidden = true
         }
     }
     
