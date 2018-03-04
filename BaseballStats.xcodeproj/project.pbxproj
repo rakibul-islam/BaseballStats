@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F201ED06204C5C3400B3BAC5 /* TeamMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED05204C5C3400B3BAC5 /* TeamMO+Extension.swift */; };
+		F201ED08204C76FA00B3BAC5 /* PlayerMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED07204C76FA00B3BAC5 /* PlayerMO+Extension.swift */; };
 		F233F4C02048F31D008AD38E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233F4BF2048F31D008AD38E /* Player.swift */; };
 		F264E531204902E30032ABDE /* BattingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264E530204902E30032ABDE /* BattingStats.swift */; };
 		F26ADD44204A7FDA009B33CF /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD43204A7FDA009B33CF /* Team.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F201ED05204C5C3400B3BAC5 /* TeamMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeamMO+Extension.swift"; sourceTree = "<group>"; };
+		F201ED07204C76FA00B3BAC5 /* PlayerMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerMO+Extension.swift"; sourceTree = "<group>"; };
 		F233F4BF2048F31D008AD38E /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F264E530204902E30032ABDE /* BattingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattingStats.swift; sourceTree = "<group>"; };
 		F26ADD43204A7FDA009B33CF /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				F26ADD58204BBFF3009B33CF /* CoreDataController.swift */,
+				F201ED05204C5C3400B3BAC5 /* TeamMO+Extension.swift */,
+				F201ED07204C76FA00B3BAC5 /* PlayerMO+Extension.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -173,7 +179,7 @@
 				F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */,
 				F2E2EB612048DA2D00DA213A /* Main.storyboard */,
 				F2E2EB642048DA2D00DA213A /* Assets.xcassets */,
-                F2E2EB662048DA2D00DA213A /* LaunchScreen.storyboard */,
+				F2E2EB662048DA2D00DA213A /* LaunchScreen.storyboard */,
 				F2E2EB692048DA2D00DA213A /* Info.plist */,
 			);
 			path = BaseballStats;
@@ -295,6 +301,7 @@
 				F272293D204A1B9F00597B37 /* PlayerStatsViewController.swift in Sources */,
 				F26ADD49204B7782009B33CF /* TeamViewController.swift in Sources */,
 				F26ADD56204BBE30009B33CF /* BaseballStats.xcdatamodeld in Sources */,
+				F201ED06204C5C3400B3BAC5 /* TeamMO+Extension.swift in Sources */,
 				F2E2EB602048DA2D00DA213A /* TeamListViewController.swift in Sources */,
 				F2FA65F3204A6366001C93EB /* PlayerStat.swift in Sources */,
 				F264E531204902E30032ABDE /* BattingStats.swift in Sources */,
@@ -303,6 +310,7 @@
 				F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */,
 				F2E2EB812048E1EE00DA213A /* PlayerRetrievalUtility.swift in Sources */,
 				F26ADD59204BBFF3009B33CF /* CoreDataController.swift in Sources */,
+				F201ED08204C76FA00B3BAC5 /* PlayerMO+Extension.swift in Sources */,
 				F26ADD47204A80E3009B33CF /* TeamRetrievalUtility.swift in Sources */,
 				F233F4C02048F31D008AD38E /* Player.swift in Sources */,
 				F26ADD4C204B883F009B33CF /* CommonAlerts.swift in Sources */,

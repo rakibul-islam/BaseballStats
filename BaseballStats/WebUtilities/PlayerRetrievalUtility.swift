@@ -10,6 +10,8 @@ import UIKit
 
 class PlayerRetrievalUtility: NSObject {
     let baseURL = "https://jobposting28.azurewebsites.net/api/"
+    var coreDataController = CoreDataController.sharedInstance
+    
     func getPlayersWith(searchParameter: String, completionBlock: @escaping ([Player]) -> Void, failureBlock: @escaping (Error) -> Void) {
         let encodedStr = searchParameter.addingPercentEncoding(withAllowedCharacters: .letters) ?? searchParameter
         let urlString = "\(baseURL)player?criteria=\(encodedStr)"
@@ -22,7 +24,7 @@ class PlayerRetrievalUtility: NSObject {
                             var players = [Player]()
                             for playerDictionary in jsonDict {
                                 let player = Player(dictionary: playerDictionary)
-                                player.team = TeamRetrievalUtility.sharedInstance.getTeamForId(teamID: player.teamID)
+                                player.teamMO = self.coreDataController.getTeamFor(teamID: player.teamID)
                                 players.append(player)
                             }
                             completionBlock(players)

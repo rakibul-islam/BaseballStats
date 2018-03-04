@@ -11,8 +11,8 @@ import UIKit
 class TeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    var team: Team?
-    var selectedPlayer: Player?
+    var team: TeamMO?
+    var selectedPlayer: PlayerMO?
     lazy var playerRetrievalUtility = PlayerRetrievalUtility()
 
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let player = team?.roster?[indexPath.row], let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "playerCell") else { return UITableViewCell() }
+        guard let player = team?.roster?[indexPath.row] as? PlayerMO, let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "playerCell") else { return UITableViewCell() }
         tableViewCell.textLabel?.text = player.displayName
         tableViewCell.detailTextLabel?.text = player.positionName
         return tableViewCell
@@ -48,7 +48,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - UITableView delegate methods
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedPlayer = team?.roster?[indexPath.row]
+        selectedPlayer = team?.roster?[indexPath.row] as? PlayerMO
         if let _ = selectedPlayer?.battingStats {
             performSegue(withIdentifier: "showPlayerInfo", sender: nil)
         } else if let _ = selectedPlayer?.pitchingStats {

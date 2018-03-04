@@ -9,8 +9,8 @@
 import UIKit
 
 class TeamListViewController: UITableViewController {
-    var teams = [Team]()
-    var selectedTeam: Team?
+    var teams = [TeamMO]()
+    var selectedTeam: TeamMO?
     @IBOutlet weak var redoBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -63,15 +63,14 @@ class TeamListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let team = teams[indexPath.row]
         selectedTeam = team
-        if let _ = team.roster {
+        if let roster = team.roster, roster.count > 0 {
             self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
         } else {
             CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
-            TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { (players) in
+            TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { () in
                 DispatchQueue.main.async {
                     CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        team.roster = players
-                        self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
+//                        self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
                     })
                 }
             }, failureBlock: { (error) in

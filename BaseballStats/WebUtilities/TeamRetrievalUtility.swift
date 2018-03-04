@@ -9,12 +9,14 @@
 import UIKit
 
 class TeamRetrievalUtility {
-    let baseURL = "https://jobposting28.azurewebsites.net/api/team"
-    private var teams = [Team]()
+    private let baseURL = "https://jobposting28.azurewebsites.net/api/team"
+    private var teams = [TeamMO]()
+    var coreDataController = CoreDataController.sharedInstance
     
     static let sharedInstance = TeamRetrievalUtility()
     
-    func getTeams(completionBlock: (([Team]) -> Void)?, failureBlock: @escaping (Error) -> Void) {
+    func getTeams(completionBlock: (([TeamMO]) -> Void)?, failureBlock: @escaping (Error) -> Void) {
+        teams = coreDataController.getAllTeams()
         if teams.count == 0 {
             if let url = URL(string: baseURL) {
                 let session = URLSession.shared
@@ -23,9 +25,10 @@ class TeamRetrievalUtility {
                         do {
                             if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [[String: Any]] {
                                 for teamDictionary in jsonDict {
-                                    self.teams.append(Team(dictionary: teamDictionary))
+                                    self.coreDataController.addTeamFrom(dictionary: teamDictionary)
                                 }
                             }
+                            self.teams = self.coreDataController.getAllTeams()
                             completionBlock?(self.teams)
                         } catch let jsonError {
                             failureBlock(jsonError)
@@ -41,7 +44,7 @@ class TeamRetrievalUtility {
         }
     }
     
-    func getTeamForId(teamID: Int?) -> Team? {
+    func getTeamForId(teamID: Int?) -> TeamMO? {
         guard let teamId = teamID else {
             return nil
         }
@@ -50,7 +53,7 @@ class TeamRetrievalUtility {
         })
     }
     
-    func getRosterFor(team: Team, completionBlock: @escaping ([Player]) -> Void, failureBlock: @escaping (Error) -> Void) {
+    func getRosterFor(team: TeamMO, completionBlock: @escaping () -> Void, failureBlock: @escaping (Error) -> Void) {
         let urlString = "\(baseURL)/\(team.teamID)/roster"
         if let url = URL(string: urlString) {
             let session = URLSession.shared
@@ -58,13 +61,10 @@ class TeamRetrievalUtility {
                 if let responseData = data {
                     do {
                         if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [[String: Any]] {
-                            var players = [Player]()
                             for playerDictionary in jsonDict {
-                                let player = Player(dictionary: playerDictionary)
-                                player.team = team
-                                players.append(player)
+                                self.coreDataController.addPlayerFor(team: team, with: playerDictionary)
                             }
-                            completionBlock(players)
+                            completionBlock()
                         }
                     } catch let jsonError {
                         failureBlock(jsonError)
