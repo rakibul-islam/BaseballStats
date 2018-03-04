@@ -552,6 +552,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="fui-jM-48d" id="Glf-7B-cat"/>
+                        <segue destination="ERI-Is-TqD" kind="show" identifier="showPlayerInfo" id="nSB-0r-ifH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yr8-aE-xeX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -580,4 +581,7 @@
     <resources>
         <image name="first" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="nSB-0r-ifH"/>
+    </inferredMetricsTieBreakers>
 </document>

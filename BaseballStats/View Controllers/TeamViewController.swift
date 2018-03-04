@@ -9,9 +9,11 @@
 import UIKit
 
 class TeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableView: UITableView!
     var team: Team?
+    var selectedPlayer: Player?
+    lazy var playerRetrievalUtility = PlayerRetrievalUtility()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,15 +21,11 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.title = team?.abbreviation
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let statsVC = segue.destination as? PlayerStatsViewController {
+            statsVC.player = selectedPlayer
+        }
     }
-    */
     
     //MARK: - UITableView datasource methods
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,5 +41,54 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableViewCell.textLabel?.text = player.displayName
         tableViewCell.detailTextLabel?.text = player.positionName
         return tableViewCell
+    }
+    
+    //MARK: - UITableView delegate methods
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPlayer = team?.roster?[indexPath.row]
+        if let _ = selectedPlayer?.battingStats {
+            performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+        } else if let _ = selectedPlayer?.pitchingStats {
+            performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+        } else {
+            getStatsForSelectedPlayer()
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    //MARK: - Other methods
+    func getStatsForSelectedPlayer() {
+        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
+        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            URLSession.shared.invalidateAndCancel()
+        }))
+        present(loadingController, animated: true, completion: nil)
+        if let playerID = selectedPlayer?.playerID {
+            playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
+                self.selectedPlayer?.battingStats = battingStats
+                self.selectedPlayer?.pitchingStats = pitchingStats
+                DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: {
+                        self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+                    })
+                }
+            }, failureBlock: { (error) in
+                DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: {
+                        self.showErrorAlert(error: error)
+                    })
+                }
+            })
+        }
+    }
+    
+    func showErrorAlert(error: Error?) {
+        var message = "No players found!"
+        if let theError = error {
+            message = theError.localizedDescription
+        }
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 }

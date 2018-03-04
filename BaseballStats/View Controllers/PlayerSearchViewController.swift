@@ -50,7 +50,7 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
                     loadingController.dismiss(animated: true, completion: {
-                        self.showErrorAlert(error: nil)
+                        self.showErrorAlert(error: error)
                     })
                 }
             })
@@ -116,7 +116,7 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
                     loadingController.dismiss(animated: true, completion: {
-                        self.showErrorAlert(error: nil)
+                        self.showErrorAlert(error: error)
                     })
                 }
             })
