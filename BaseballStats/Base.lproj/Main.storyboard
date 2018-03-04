@@ -434,7 +434,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ud-1I-Mdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2240.8000000000002" y="-313.49325337331339"/>
+            <point key="canvasLocation" x="3002" y="360"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="E1i-OR-a2M">
@@ -565,6 +565,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Bookmarks" id="s6R-WA-n2X"/>
+                    <connections>
+                        <segue destination="ERI-Is-TqD" kind="show" identifier="showPlayerInfo" id="xr4-Xh-O0T"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6TR-3h-MKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -669,6 +672,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tts-8s-wC2"/>
+        <segue reference="xr4-Xh-O0T"/>
     </inferredMetricsTieBreakers>
 </document>
