@@ -74,6 +74,7 @@ class TeamListViewController: UITableViewController {
                 }
             })
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
