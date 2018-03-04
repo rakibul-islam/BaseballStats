@@ -394,7 +394,7 @@
                         <viewLayoutGuide key="safeArea" id="eMj-5I-Wxc"/>
                     </view>
                     <navigationItem key="navigationItem" title="Player Info" id="fBG-kS-E7u">
-                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="ixm-CZ-xT7">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="ixm-CZ-xT7">
                             <connections>
                                 <action selector="bookmarkButtonTapped:" destination="ERI-Is-TqD" id="l1S-I1-X0D"/>
                             </connections>
@@ -402,6 +402,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="batsAndThrowsLabel" destination="uT7-xU-KQQ" id="F9o-LU-A4J"/>
+                        <outlet property="bookmarkBarButtonItem" destination="ixm-CZ-xT7" id="yG8-n5-MvA"/>
                         <outlet property="dateOfBirthLabel" destination="18d-0Z-dmh" id="rsY-Wf-mWB"/>
                         <outlet property="headshotImageView" destination="Gea-Yh-OeS" id="OJR-K9-qrK"/>
                         <outlet property="heightWeightLabel" destination="048-cb-Qs0" id="jMb-VB-jzB"/>
