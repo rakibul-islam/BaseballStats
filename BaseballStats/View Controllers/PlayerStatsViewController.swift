@@ -77,27 +77,14 @@ class PlayerStatsViewController: UIViewController {
     
     @IBAction func segmentedControlValueChanged(_ sender: Any) {
         if yearSegmentedControl.isEqual(sender) {
-            if pitcher {
-                if let pitchingStatsArray = player?.pitchingStats, pitchingStatsArray.count > 0 {
-                    let pitchingStats = pitchingStatsArray[yearSegmentedControl.selectedSegmentIndex]
-                    for index in 0..<min(pitchingStats.displayValues.count, statsLabels.count) {
-                        statsLabels[index].text = pitchingStats.displayValues[index]
-                    }
-                    if let currentTeamId = player?.teamID, let statTeamId = pitchingStats.teamID {
-                        previousTeamLabel.isHidden = currentTeamId == statTeamId
-                        previousTeamLabel.text = "Member of: \(pitchingStats.team?.fullName ?? "")"
-                    }
+            if let statsArray:[PlayerStat] = pitcher ? player?.pitchingStats : player?.battingStats, statsArray.count > 0 {
+                let stats = statsArray[yearSegmentedControl.selectedSegmentIndex]
+                for index in 0..<min(stats.displayValues.count, statsLabels.count) {
+                    statsLabels[index].text = stats.displayValues[index]
                 }
-            } else {
-                if let battingStatsArray = player?.battingStats, battingStatsArray.count > 0 {
-                    let battingStats = battingStatsArray[yearSegmentedControl.selectedSegmentIndex]
-                    for index in 0..<min(battingStats.displayValues.count, statsLabels.count) {
-                        statsLabels[index].text = battingStats.displayValues[index]
-                    }
-                    if let currentTeamId = player?.teamID, let statTeamId = battingStats.teamID {
-                        previousTeamLabel.isHidden = currentTeamId == statTeamId
-                        previousTeamLabel.text = "Member of: \(battingStats.team?.fullName ?? "")"
-                    }
+                if let currentTeamId = player?.teamID, let statTeamId = stats.teamID, let oldTeamName = stats.team?.fullName {
+                    previousTeamLabel.isHidden = currentTeamId == statTeamId
+                    previousTeamLabel.text = "Member of: \(oldTeamName)"
                 }
             }
         }
