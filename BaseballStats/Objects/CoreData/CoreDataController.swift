@@ -93,6 +93,7 @@ class CoreDataController {
         let battingStatMO = getBattingStatFor(player: player, for: dictionary["YearID"]) ?? createBattingStatEntity()
         battingStatMO.setupBattingFrom(dictionary: dictionary)
         battingStatMO.player = player
+        battingStatMO.team = getTeamFor(team: dictionary["TeamID"])
         saveContext()
     }
     
@@ -100,6 +101,7 @@ class CoreDataController {
         let pitchingStatMO = getPitchingStatFor(player: player, for: dictionary["YearID"]) ?? createPitchingStatEntity()
         pitchingStatMO.setupPitchingFrom(dictionary: dictionary)
         pitchingStatMO.player = player
+        pitchingStatMO.team = getTeamFor(team: dictionary["TeamID"])
         saveContext()
     }
     

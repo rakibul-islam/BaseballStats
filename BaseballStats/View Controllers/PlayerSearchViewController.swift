@@ -12,8 +12,8 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var players = [Player]()
-    var selectedPlayer: Player?
+    var players = [PlayerMO]()
+    var selectedPlayer: PlayerMO?
     
     lazy var playerRetrievalUtility = PlayerRetrievalUtility()
 
@@ -94,22 +94,18 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     //MARK: - Other methods
     func getStatsForSelectedPlayer() {
         CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
-        if let playerID = selectedPlayer?.playerID {
-            playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
-                self.selectedPlayer?.battingStats = battingStats
-                self.selectedPlayer?.pitchingStats = pitchingStats
-                DispatchQueue.main.async {
-                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
-                    })
-                }
-            }, failureBlock: { (error) in
-                DispatchQueue.main.async {
-                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
-                    })
-                }
-            })
-        }
+        playerRetrievalUtility.getStats(for: selectedPlayer, completionBlock: {
+            DispatchQueue.main.async {
+                CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                    self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+                })
+            }
+        }, failureBlock: { (error) in
+            DispatchQueue.main.async {
+                CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                    CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
+                })
+            }
+        })
     }
 }

@@ -63,24 +63,30 @@ class TeamListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let team = teams[indexPath.row]
         selectedTeam = team
-        if let roster = team.roster, roster.count > 0 {
-            self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
-        } else {
-            CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
-            TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { () in
-                DispatchQueue.main.async {
-                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
-                    })
-                }
-            }, failureBlock: { (error) in
-                DispatchQueue.main.async {
-                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
-                    })
-                }
-            })
-        }
+        CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
+        TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { () in
+            if let roster = team.roster {
+                let mutableRoster = NSMutableOrderedSet(orderedSet: roster)
+                mutableRoster.sort(comparator: { (player1, player2) -> ComparisonResult in
+                    guard let rosterPlayer1 = player1 as? PlayerMO, let lastName1 = rosterPlayer1.lastName, let rosterPlayer2 = player2 as? PlayerMO, let lastName2 = rosterPlayer2.lastName else {
+                        return ComparisonResult.orderedSame
+                    }
+                    return lastName1.compare(lastName2)
+                })
+                team.roster = mutableRoster
+            }
+            DispatchQueue.main.async {
+                CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                    self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
+                })
+            }
+        }, failureBlock: { (error) in
+            DispatchQueue.main.async {
+                CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                    CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
+                })
+            }
+        })
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

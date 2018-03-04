@@ -9,64 +9,31 @@
 import UIKit
 
 class PitchingStats: PlayerStat {
-    var outs: Int
-    var earnedRuns: Int
-    var gamesStarted: Int
-    var gamesFinished: Int
-    var completeGames: Int
-    var shutouts: Int
-    var wins: Int
-    var losses: Int
-    var saves: Int
-    
-    override init(dictionary: [String: Any]) {
-        outs = dictionary["OUTS"] as? Int ?? 0
-        earnedRuns = dictionary["ER"] as? Int ?? 0
-        gamesStarted = dictionary["GS"] as? Int ?? 0
-        gamesFinished = dictionary["GF"] as? Int ?? 0
-        completeGames = dictionary["CG"] as? Int ?? 0
-        shutouts = dictionary["SHO"] as? Int ?? 0
-        wins = dictionary["W"] as? Int ?? 0
-        losses = dictionary["L"] as? Int ?? 0
-        saves = dictionary["SV"] as? Int ?? 0
-        super.init(dictionary: dictionary)
-    }
-    
-    //MARK: - Calculated values
-    
-    var inningsPitched: Float {
-        get {
-            let remainder = Float(outs).truncatingRemainder(dividingBy: 3.0)
-            let result = Float(outs / 3) + remainder / 10.0
-            return result
-        }
-    }
-    
-    var era: Float {
-        get {
-            return Float(earnedRuns * 27) / Float(outs)
-        }
-    }
-    
     //MARK: - ViewModel methods
     
     var eraString: String? {
         get {
-            return NumberFormatters.pitchingNumberFormatter.string(from: NSNumber(value: era))
+            guard let pitchingObject = managedObject as? PitchingStatMO else {
+                return nil
+            }
+            return NumberFormatters.pitchingNumberFormatter.string(from: NSNumber(value: pitchingObject.getERA()))
         }
     }
     
     override var displayValues: [String?] {
         get {
-            return ["\(games)",
-                "\(gamesStarted)",
-                "\(wins)",
-                "\(losses)",
-                "\(saves)",
-                "\(inningsPitched)",
-                "\(hits)",
-                "\(strikeouts)",
-                "\(walks)",
+            guard let pitchingObject = managedObject as? PitchingStatMO else {
+                return super.displayValues
+            }
+            return ["\(pitchingObject.games)",
+                "\(pitchingObject.gamesStarted)",
+                "\(pitchingObject.wins)",
+                "\(pitchingObject.losses)",
+                "\(pitchingObject.saves)",
+                "\(pitchingObject.getInningsPitched())",
+                "\(pitchingObject.getHits())",
+                "\(pitchingObject.strikeouts)",
+                "\(pitchingObject.getWalks())",
                 eraString]
         }
     }

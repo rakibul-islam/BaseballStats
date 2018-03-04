@@ -23,7 +23,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let statsVC = segue.destination as? PlayerStatsViewController {
-//            statsVC.player = selectedPlayer
+            statsVC.player = selectedPlayer
             let backButtonItem = UIBarButtonItem()
             backButtonItem.title = "Roster"
             navigationItem.backBarButtonItem = backButtonItem
@@ -65,7 +65,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         playerRetrievalUtility.getStats(for: selectedPlayer, completionBlock: {
             DispatchQueue.main.async {
                 CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-//                    self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+                    self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
                 })
             }
         }, failureBlock: { (error) in

@@ -22,11 +22,12 @@ class PlayerStatsViewController: UIViewController {
     @IBOutlet var statsLabels: [UILabel]!
     @IBOutlet weak var previousTeamLabel: UILabel!
     
-    var player: Player?
+    var player: PlayerMO?
     var pitcher = false
     
     let batterHeaderTexts = ["G","AB","H","K","BB","HR","AVG","OBP","SLG","OPS"]
     let pitcherHeaderTexts = ["G","GS","W","L","SV","IP","H","K","BB","ERA"]
+    var viewModelArray = [PlayerStat]()
     
     lazy var playerRetrievalUtility = PlayerRetrievalUtility()
     
@@ -52,21 +53,32 @@ class PlayerStatsViewController: UIViewController {
                 headerLabels[index].text = headerTexts[index]
             }
         }
+        if pitcher {
+            if let statsArray = player?.pitchingStats?.array as? [PlayerStatMO] {
+                for stat in statsArray {
+                    viewModelArray.append(PitchingStats(with: stat))
+                }
+            }
+        } else {
+            if let statsArray = player?.battingStats?.array as? [PlayerStatMO] {
+                for stat in statsArray {
+                    viewModelArray.append(BattingStats(with: stat))
+                }
+            }
+        }
+        viewModelArray = viewModelArray.sorted(by: { (stat1, stat2) -> Bool in
+            return stat1.managedObject.yearID > stat2.managedObject.yearID
+        })
         displayStats()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func displayStats() {
-        if let statsArray: [PlayerStat] = (pitcher ? player?.pitchingStats : player?.battingStats), statsArray.count > 0 {
-            let numberOfSegments = min(statsArray.count, 3)
+        if viewModelArray.count > 0 {
+            let numberOfSegments = min(viewModelArray.count, 3)
             yearSegmentedControl.removeAllSegments()
             for index in 0..<numberOfSegments {
-                let stats = statsArray[index]
-                yearSegmentedControl.insertSegment(withTitle: "\(stats.yearID)", at: index, animated: false)
+                let stats = viewModelArray[index]
+                yearSegmentedControl.insertSegment(withTitle: "\(stats.managedObject.yearID)", at: index, animated: false)
             }
             yearSegmentedControl.selectedSegmentIndex = 0
             segmentedControlValueChanged(yearSegmentedControl)
@@ -77,15 +89,13 @@ class PlayerStatsViewController: UIViewController {
     
     @IBAction func segmentedControlValueChanged(_ sender: Any) {
         if yearSegmentedControl.isEqual(sender) {
-            if let statsArray:[PlayerStat] = pitcher ? player?.pitchingStats : player?.battingStats, statsArray.count > 0 {
-                let stats = statsArray[yearSegmentedControl.selectedSegmentIndex]
-                for index in 0..<min(stats.displayValues.count, statsLabels.count) {
-                    statsLabels[index].text = stats.displayValues[index]
-                }
-                if let currentTeamId = player?.teamID, let statTeamId = stats.teamID, let oldTeamName = stats.team?.fullName {
-                    previousTeamLabel.isHidden = currentTeamId == statTeamId
-                    previousTeamLabel.text = "Member of: \(oldTeamName)"
-                }
+            let stats = viewModelArray[yearSegmentedControl.selectedSegmentIndex]
+            for index in 0..<min(stats.displayValues.count, statsLabels.count) {
+                statsLabels[index].text = stats.displayValues[index]
+            }
+            if let currentTeamId = player?.teamID, let oldTeamName = stats.managedObject.team?.fullName {
+                previousTeamLabel.isHidden = currentTeamId == stats.managedObject.teamID
+                previousTeamLabel.text = "Member of: \(oldTeamName)"
             }
         }
     }

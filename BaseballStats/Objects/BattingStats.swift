@@ -9,88 +9,55 @@
 import UIKit
 
 class BattingStats: PlayerStat {
-    var stolenBases: Int
-    var caughtStealing: Int
-    var runsBattedIn: Int
-    
-    override init(dictionary: [String: Any]) {
-        stolenBases = dictionary["SB"] as? Int ?? 0
-        caughtStealing = dictionary["CS"] as? Int ?? 0
-        runsBattedIn = dictionary["RBI"] as? Int ?? 0
-        super.init(dictionary: dictionary)
-    }
-    
-    //MARK: - Calculated values
-    
-    var average: Float {
-        get {
-            guard atBats > 0 else {
-                return 0
-            }
-            return Float(hits) / Float(atBats)
-        }
-    }
-    
-    var onBasePercentage: Float {
-        get {
-            let calculatedPA = atBats + walks + hitByPitch + sacrificeFlies
-            guard calculatedPA > 0 else {
-                return 0
-            }
-            return Float(hits + walks + hitByPitch) / Float(calculatedPA)
-        }
-    }
-    
-    var slugging: Float {
-        get {
-            guard atBats > 0 else {
-                return 0
-            }
-            let weightedHits = singles + (2 * doubles) + (3 * triples) + (4 * homeRuns)
-            return Float(weightedHits) / Float(atBats)
-        }
-    }
-    
-    var ops: Float {
-        get {
-            return onBasePercentage + slugging
-        }
-    }
-    
     //MARK: - ViewModel methods
     
     var averageString: String? {
         get {
-            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: average))
+            guard let battingObject = managedObject as? BattingStatMO else {
+                return nil
+            }
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.getAverage()))
         }
     }
     
     var obpString: String? {
         get {
-            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: onBasePercentage))
+            guard let battingObject = managedObject as? BattingStatMO else {
+                return nil
+            }
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.getOnBasePercentage()))
         }
     }
     
     var sluggingString: String? {
         get {
-            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: slugging))
+            guard let battingObject = managedObject as? BattingStatMO else {
+                return nil
+            }
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.getSlugging()))
         }
     }
     
     var opsString: String? {
         get {
-            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: ops))
+            guard let battingObject = managedObject as? BattingStatMO else {
+                return nil
+            }
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.getOPS()))
         }
     }
     
     override var displayValues: [String?] {
         get {
-            return ["\(games)",
-                "\(atBats)",
-                "\(hits)",
-                "\(strikeouts)",
-                "\(walks)",
-                "\(homeRuns)",
+            guard let battingObject = managedObject as? BattingStatMO else {
+                return super.displayValues
+            }
+            return ["\(battingObject.games)",
+                "\(battingObject.atBats)",
+                "\(battingObject.getHits())",
+                "\(battingObject.strikeouts)",
+                "\(battingObject.getWalks())",
+                "\(battingObject.homeRuns)",
                 averageString,
                 obpString,
                 sluggingString,

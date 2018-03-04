@@ -12,7 +12,7 @@ class PlayerRetrievalUtility: NSObject {
     let baseURL = "https://jobposting28.azurewebsites.net/api/"
     var coreDataController = CoreDataController.sharedInstance
     
-    func getPlayersWith(searchParameter: String, completionBlock: @escaping ([Player]) -> Void, failureBlock: @escaping (Error) -> Void) {
+    func getPlayersWith(searchParameter: String, completionBlock: @escaping ([PlayerMO]) -> Void, failureBlock: @escaping (Error) -> Void) {
         let encodedStr = searchParameter.addingPercentEncoding(withAllowedCharacters: .letters) ?? searchParameter
         let urlString = "\(baseURL)player?criteria=\(encodedStr)"
         if let url = URL(string: urlString) {
@@ -21,10 +21,14 @@ class PlayerRetrievalUtility: NSObject {
                 if let responseData = data {
                     do {
                         if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [[String: Any]] {
-                            var players = [Player]()
+                            var players = [PlayerMO]()
                             for playerDictionary in jsonDict {
-                                let player = Player(dictionary: playerDictionary)
-                                player.teamMO = self.coreDataController.getTeamFor(team: player.teamID)
+                                if let team = self.coreDataController.getTeamFor(team: playerDictionary["TeamID"]) {
+                                    self.coreDataController.addPlayerFor(team: team, with: playerDictionary)
+                                } else {
+                                    self.coreDataController.addPlayerFrom(dictionary: playerDictionary)
+                                }
+                                let player = self.coreDataController.getPlayerFor(player: playerDictionary["PlayerID"])!
                                 players.append(player)
                             }
                             completionBlock(players)
@@ -37,47 +41,6 @@ class PlayerRetrievalUtility: NSObject {
                 }
             })
             sessionTask.resume()
-        }
-    }
-    
-    func getStats(for player: Int?, completionBlock: @escaping ([BattingStats], [PitchingStats]) -> Void, failureBlock: @escaping (Error) -> Void) {
-        if let playerID = player {
-            let urlString = "\(baseURL)player/\(playerID)/stats"
-            if let url = URL(string: urlString) {
-                let session = URLSession.shared
-                let sessionTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
-                    if let responseData = data {
-                        do {
-                            if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] {
-                                var allBattingStats = [BattingStats]()
-                                if let battingStatsArray = jsonDict["Batting"] as? [[String: Any]] {
-                                    for battingStatsDict in battingStatsArray {
-                                        allBattingStats.append(BattingStats(dictionary: battingStatsDict))
-                                    }
-                                    allBattingStats = allBattingStats.sorted(by: { (stat1, stat2) -> Bool in
-                                        return stat1.yearID > stat2.yearID
-                                    })
-                                }
-                                var allPitchingStats = [PitchingStats]()
-                                if let pitchingStatsArray = jsonDict["Pitching"] as? [[String: Any]] {
-                                    for pitchingStatsDict in pitchingStatsArray {
-                                        allPitchingStats.append(PitchingStats(dictionary: pitchingStatsDict))
-                                    }
-                                    allPitchingStats = allPitchingStats.sorted(by: { (stat1, stat2) -> Bool in
-                                        return stat1.yearID > stat2.yearID
-                                    })
-                                }
-                                completionBlock(allBattingStats, allPitchingStats)
-                            }
-                        } catch let jsonError {
-                            failureBlock(jsonError)
-                        }
-                    } else if let responseError = error {
-                        failureBlock(responseError)
-                    }
-                })
-                sessionTask.resume()
-            }
         }
     }
     
@@ -94,13 +57,11 @@ class PlayerRetrievalUtility: NSObject {
                                     for battingStatsDict in battingStatsArray {
                                         self.coreDataController.addBattingStatFor(player: playerObject, with: battingStatsDict)
                                     }
-                                    playerObject.battingStats = playerObject.battingStats?.reversed //Sort from most recent year first
                                 }
                                 if let pitchingStatsArray = jsonDict["Pitching"] as? [[String: Any]] {
                                     for pitchingStatsDict in pitchingStatsArray {
                                         self.coreDataController.addPitchingStatFor(player: playerObject, with: pitchingStatsDict)
                                     }
-                                    playerObject.pitchingStats = playerObject.pitchingStats?.reversed //Sort from most recent year first
                                 }
                                 completionBlock()
                             }
