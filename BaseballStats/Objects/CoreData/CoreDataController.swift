@@ -90,7 +90,7 @@ class CoreDataController {
     }
     
     func addBattingStatFor(player: PlayerMO, with dictionary: [String: Any]) {
-        let battingStatMO = getBattingStatFor(player: player, for: dictionary["YearID"]) ?? createBattingStatEntity()
+        let battingStatMO = getBattingStatFor(player: player, for: dictionary["YearID"], with: dictionary["TeamID"]) ?? createBattingStatEntity()
         battingStatMO.setupBattingFrom(dictionary: dictionary)
         battingStatMO.player = player
         battingStatMO.team = getTeamFor(team: dictionary["TeamID"])
@@ -98,7 +98,7 @@ class CoreDataController {
     }
     
     func addPitchingStatFor(player: PlayerMO, with dictionary: [String: Any]) {
-        let pitchingStatMO = getPitchingStatFor(player: player, for: dictionary["YearID"]) ?? createPitchingStatEntity()
+        let pitchingStatMO = getPitchingStatFor(player: player, for: dictionary["YearID"], with: dictionary["TeamID"]) ?? createPitchingStatEntity()
         pitchingStatMO.setupPitchingFrom(dictionary: dictionary)
         pitchingStatMO.player = player
         pitchingStatMO.team = getTeamFor(team: dictionary["TeamID"])
@@ -151,12 +151,12 @@ class CoreDataController {
         return nil
     }
     
-    func getBattingStatFor(player: PlayerMO, for year: Any?) -> BattingStatMO? {
-        guard let yearID = year as? Int16 else {
+    func getBattingStatFor(player: PlayerMO, for year: Any?, with team: Any?) -> BattingStatMO? {
+        guard let yearID = year as? Int16, let teamID = team as? Int16 else {
             return nil
         }
         let statFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BattingStat")
-        statFetchRequest.predicate = NSPredicate(format: "playerID == %d AND yearID == %d", player.playerID, yearID)
+        statFetchRequest.predicate = NSPredicate(format: "playerID == %d AND yearID == %d AND teamID == %d", player.playerID, yearID, teamID)
         do {
             if let fetchResult = try managedObjectContext.fetch(statFetchRequest) as? [BattingStatMO] {
                 return fetchResult.last
@@ -167,12 +167,12 @@ class CoreDataController {
         return nil
     }
     
-    func getPitchingStatFor(player: PlayerMO, for year: Any?) -> PitchingStatMO? {
-        guard let yearID = year as? Int16 else {
+    func getPitchingStatFor(player: PlayerMO, for year: Any?, with team: Any?) -> PitchingStatMO? {
+        guard let yearID = year as? Int16, let teamID = team as? Int16 else {
             return nil
         }
         let statFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PitchingStat")
-        statFetchRequest.predicate = NSPredicate(format: "playerID == %d AND yearID == %d", player.playerID, yearID)
+        statFetchRequest.predicate = NSPredicate(format: "playerID == %d AND yearID == %d AND teamID == %d", player.playerID, yearID, teamID)
         do {
             if let fetchResult = try managedObjectContext.fetch(statFetchRequest) as? [PitchingStatMO] {
                 return fetchResult.last

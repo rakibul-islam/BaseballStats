@@ -66,6 +66,7 @@ class PlayerStatsViewController: UIViewController {
                 }
             }
         }
+        //Sort stats chronologically
         viewModelArray = viewModelArray.sorted(by: { (stat1, stat2) -> Bool in
             return stat1.managedObject.yearID > stat2.managedObject.yearID
         })
