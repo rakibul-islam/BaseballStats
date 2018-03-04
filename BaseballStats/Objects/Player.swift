@@ -19,6 +19,7 @@ class Player {
     var bats: Int!
     var throwsWith: Int!
     var teamID: Int?
+    var team: Team?
     var birthDate: Date?
     var birthCity: String!
     var birthCountry: String!
@@ -43,6 +44,7 @@ class Player {
         bats = dictionary["Bats"] as? Int
         throwsWith = dictionary["Throws"] as? Int
         teamID = dictionary["TeamID"] as? Int
+        team = TeamRetrievalUtility.sharedInstance.getTeamForId(teamID: teamID)
         if let date = dictionary["BirthDate"] as? String {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -103,9 +105,10 @@ class Player {
     }
     var teamAndNumber: String {
         get {
-            let num = number ?? 0
-            let team = teamID ?? 0 //TODO: get team name from teamID
-            return "#\(num) - \(team)"
+            guard let num = number, let teamName = team?.fullName else {
+                return ""
+            }
+            return "#\(num) - \(teamName)"
         }
     }
     var batsAndThrows: String {
