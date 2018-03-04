@@ -23,13 +23,17 @@ extension PitchingStatMO {
     }
     
     //MARK: - Calculated values
-    func getInningsPitched() -> Float {
-        let remainder = Float(outs).truncatingRemainder(dividingBy: 3.0)
-        let result = Float(outs / 3) + remainder / 10.0
-        return result
+    var inningsPitched: Float {
+        get {
+            let remainder = Float(outs).truncatingRemainder(dividingBy: 3.0)
+            let result = Float(outs / 3) + remainder / 10.0
+            return result
+        }
     }
     
-    func getERA() -> Float {
-        return Float(earnedRuns * 27) / Float(outs)
+    var era: Float {
+        get {
+            return Float(earnedRuns * 27) / Float(outs)
+        }
     }
 }

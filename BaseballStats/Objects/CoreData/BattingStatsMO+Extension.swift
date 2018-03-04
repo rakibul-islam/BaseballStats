@@ -17,30 +17,38 @@ extension BattingStatMO {
     }
     
     //MARK: - Calculated values
-    func getAverage() -> Float {
-        guard atBats > 0 else {
-            return 0
+    var average: Float {
+        get {
+            guard atBats > 0 else {
+                return 0
+            }
+            return Float(hits) / Float(atBats)
         }
-        return Float(getHits()) / Float(atBats)
     }
     
-    func getOnBasePercentage() -> Float {
-        let calculatedPA = atBats + getWalks() + hitByPitch + sacrificeFlies
-        guard calculatedPA > 0 else {
-            return 0
+    var onBasePercentage: Float {
+        get {
+            let calculatedPA = atBats + walks + hitByPitch + sacrificeFlies
+            guard calculatedPA > 0 else {
+                return 0
+            }
+            return Float(hits + walks + hitByPitch) / Float(calculatedPA)
         }
-        return Float(getHits() + getWalks() + hitByPitch) / Float(calculatedPA)
     }
     
-    func getSlugging() -> Float {
-        guard atBats > 0 else {
-            return 0
+    var slugging: Float {
+        get {
+            guard atBats > 0 else {
+                return 0
+            }
+            let weightedHits = singles + (2 * doubles) + (3 * triples) + (4 * homeRuns)
+            return Float(weightedHits) / Float(atBats)
         }
-        let weightedHits = singles + (2 * doubles) + (3 * triples) + (4 * homeRuns)
-        return Float(weightedHits) / Float(atBats)
     }
     
-    func getOPS() -> Float {
-        return getOnBasePercentage() + getSlugging()
+    var ops: Float {
+        get {
+            return onBasePercentage + slugging
+        }
     }
 }

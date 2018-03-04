@@ -16,7 +16,7 @@ class BattingStats: PlayerStat {
             guard let battingObject = managedObject as? BattingStatMO else {
                 return nil
             }
-            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.getAverage()))
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.average))
         }
     }
     
@@ -25,7 +25,7 @@ class BattingStats: PlayerStat {
             guard let battingObject = managedObject as? BattingStatMO else {
                 return nil
             }
-            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.getOnBasePercentage()))
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.onBasePercentage))
         }
     }
     
@@ -34,7 +34,7 @@ class BattingStats: PlayerStat {
             guard let battingObject = managedObject as? BattingStatMO else {
                 return nil
             }
-            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.getSlugging()))
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.slugging))
         }
     }
     
@@ -43,7 +43,7 @@ class BattingStats: PlayerStat {
             guard let battingObject = managedObject as? BattingStatMO else {
                 return nil
             }
-            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.getOPS()))
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: battingObject.ops))
         }
     }
     
@@ -54,9 +54,9 @@ class BattingStats: PlayerStat {
             }
             return ["\(battingObject.games)",
                 "\(battingObject.atBats)",
-                "\(battingObject.getHits())",
+                "\(battingObject.hits)",
                 "\(battingObject.strikeouts)",
-                "\(battingObject.getWalks())",
+                "\(battingObject.walks)",
                 "\(battingObject.homeRuns)",
                 averageString,
                 obpString,
