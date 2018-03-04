@@ -30,11 +30,11 @@ class PlayerStatsViewController: UIViewController {
     var viewModelArray = [PlayerStat]()
     
     lazy var playerRetrievalUtility = PlayerRetrievalUtility()
+    lazy var coreDataController = CoreDataController.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        title = "Player Info"
         nameLabel.text = player?.displayName
         positionLabel.text = player?.positionName
         teamNumberLabel.text = player?.teamAndNumber
@@ -98,6 +98,12 @@ class PlayerStatsViewController: UIViewController {
                 previousTeamLabel.isHidden = currentTeamId == stats.managedObject.teamID
                 previousTeamLabel.text = "Member of: \(oldTeamName)"
             }
+        }
+    }
+    
+    @IBAction func bookmarkButtonTapped(_ sender: Any) {
+        if let playerToBookmark = player {
+            coreDataController.bookmark(player: playerToBookmark)
         }
     }
 }

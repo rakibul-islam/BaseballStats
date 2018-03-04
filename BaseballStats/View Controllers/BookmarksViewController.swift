@@ -10,10 +10,17 @@ import UIKit
 
 class BookmarksViewController: UITableViewController {
     var players = [PlayerMO]()
+    var coreDataController = CoreDataController.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        players = coreDataController.getBookmarkedPlayers()
+        tableView.reloadData()
     }
     
     //MARK: - Table view datasource methods

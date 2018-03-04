@@ -90,7 +90,7 @@
             </objects>
             <point key="canvasLocation" x="1486" y="-313"/>
         </scene>
-        <!--Player Stats View Controller-->
+        <!--Player Info-->
         <scene sceneID="FDH-62-izB">
             <objects>
                 <viewController id="ERI-Is-TqD" customClass="PlayerStatsViewController" customModule="BaseballStats" customModuleProvider="target" sceneMemberID="viewController">
@@ -393,6 +393,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eMj-5I-Wxc"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Player Info" id="fBG-kS-E7u">
+                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="ixm-CZ-xT7">
+                            <connections>
+                                <action selector="bookmarkButtonTapped:" destination="ERI-Is-TqD" id="l1S-I1-X0D"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="batsAndThrowsLabel" destination="uT7-xU-KQQ" id="F9o-LU-A4J"/>
                         <outlet property="dateOfBirthLabel" destination="18d-0Z-dmh" id="rsY-Wf-mWB"/>

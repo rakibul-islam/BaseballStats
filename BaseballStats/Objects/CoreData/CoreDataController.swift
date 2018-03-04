@@ -178,7 +178,7 @@ class CoreDataController {
         return nil
     }
     
-    func getBookmarkedPlayers() -> [PlayerMO]? {
+    func getBookmarkedPlayers() -> [PlayerMO] {
         let playerFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
         playerFetchRequest.predicate = NSPredicate(format: "bookmarked == YES")
         do {
@@ -186,9 +186,9 @@ class CoreDataController {
                 return fetchResult
             }
         } catch {
-            return nil
+            return []
         }
-        return nil
+        return []
     }
     
     func getBattingStatFor(player: PlayerMO, for year: Any?, with team: Any?) -> BattingStatMO? {
