@@ -18,12 +18,15 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.title = team?.abbreviation
+        self.title = team?.name
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let statsVC = segue.destination as? PlayerStatsViewController {
             statsVC.player = selectedPlayer
+            let backButtonItem = UIBarButtonItem()
+            backButtonItem.title = "Roster"
+            navigationItem.backBarButtonItem = backButtonItem
         }
     }
     
@@ -33,7 +36,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return team!.roster?.count ?? 0
+        return team?.roster?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,37 +61,23 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - Other methods
     func getStatsForSelectedPlayer() {
-        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
-        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            URLSession.shared.invalidateAndCancel()
-        }))
-        present(loadingController, animated: true, completion: nil)
+        CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
         if let playerID = selectedPlayer?.playerID {
             playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
                 self.selectedPlayer?.battingStats = battingStats
                 self.selectedPlayer?.pitchingStats = pitchingStats
                 DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: {
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
                         self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
                     })
                 }
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: {
-                        self.showErrorAlert(error: error)
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
                     })
                 }
             })
         }
-    }
-    
-    func showErrorAlert(error: Error?) {
-        var message = "No players found!"
-        if let theError = error {
-            message = theError.localizedDescription
-        }
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
     }
 }

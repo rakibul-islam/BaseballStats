@@ -70,46 +70,21 @@ class PlayerStatsViewController: UIViewController {
             }
             yearSegmentedControl.selectedSegmentIndex = 0
             segmentedControlValueChanged(yearSegmentedControl)
+        } else {
+            yearSegmentedControl.isHidden = true
         }
     }
     
     @IBAction func segmentedControlValueChanged(_ sender: Any) {
         if yearSegmentedControl.isEqual(sender) {
-            if pitcher {
-                if let pitchingStatsArray = player?.pitchingStats, pitchingStatsArray.count > 0 {
-                    let pitchingStats = pitchingStatsArray[yearSegmentedControl.selectedSegmentIndex]
-                    statsLabels[0].text = "\(pitchingStats.games)"
-                    statsLabels[1].text = "\(pitchingStats.gamesStarted)"
-                    statsLabels[2].text = "\(pitchingStats.wins)"
-                    statsLabels[3].text = "\(pitchingStats.losses)"
-                    statsLabels[4].text = "\(pitchingStats.saves)"
-                    statsLabels[5].text = "\(pitchingStats.inningsPitched)"
-                    statsLabels[6].text = "\(pitchingStats.hits)"
-                    statsLabels[7].text = "\(pitchingStats.strikeouts)"
-                    statsLabels[8].text = "\(pitchingStats.walks)"
-                    statsLabels[9].text = "\(pitchingStats.eraString)"
-                    if let currentTeamId = player?.teamID, let statTeamId = pitchingStats.teamID {
-                        previousTeamLabel.isHidden = currentTeamId == statTeamId
-                        previousTeamLabel.text = "Member of: \(pitchingStats.team?.fullName ?? "")"
-                    }
+            if let statsArray:[PlayerStat] = pitcher ? player?.pitchingStats : player?.battingStats, statsArray.count > 0 {
+                let stats = statsArray[yearSegmentedControl.selectedSegmentIndex]
+                for index in 0..<min(stats.displayValues.count, statsLabels.count) {
+                    statsLabels[index].text = stats.displayValues[index]
                 }
-            } else {
-                if let battingStatsArray = player?.battingStats, battingStatsArray.count > 0 {
-                    let battingStats = battingStatsArray[yearSegmentedControl.selectedSegmentIndex]
-                    statsLabels[0].text = "\(battingStats.games)"
-                    statsLabels[1].text = "\(battingStats.atBats)"
-                    statsLabels[2].text = "\(battingStats.hits)"
-                    statsLabels[3].text = "\(battingStats.strikeouts)"
-                    statsLabels[4].text = "\(battingStats.walks)"
-                    statsLabels[5].text = "\(battingStats.homeRuns)"
-                    statsLabels[6].text = battingStats.averageString
-                    statsLabels[7].text = battingStats.obpString
-                    statsLabels[8].text = battingStats.sluggingString
-                    statsLabels[9].text = battingStats.opsString
-                    if let currentTeamId = player?.teamID, let statTeamId = battingStats.teamID {
-                        previousTeamLabel.isHidden = currentTeamId == statTeamId
-                        previousTeamLabel.text = "Member of: \(battingStats.team?.fullName ?? "")"
-                    }
+                if let currentTeamId = player?.teamID, let statTeamId = stats.teamID, let oldTeamName = stats.team?.fullName {
+                    previousTeamLabel.isHidden = currentTeamId == statTeamId
+                    previousTeamLabel.text = "Member of: \(oldTeamName)"
                 }
             }
         }

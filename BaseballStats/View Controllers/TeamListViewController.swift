@@ -11,6 +11,7 @@ import UIKit
 class TeamListViewController: UITableViewController {
     var teams = [Team]()
     var selectedTeam: Team?
+    @IBOutlet weak var redoBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,28 +25,21 @@ class TeamListViewController: UITableViewController {
         }
     }
 
-    func getListOfTeams() {
-        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
-        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            URLSession.shared.invalidateAndCancel()
-        }))
-        present(loadingController, animated: true, completion: nil)
-        TeamRetrievalUtility.sharedInstance.getTeams { (teams) in
-            loadingController.dismiss(animated: true, completion: {
-                self.teams = teams
-                self.tableView.reloadData()
-            })
-        }
+    @IBAction func redoBarButtonItemClicked(_ sender: Any) {
+        getListOfTeams()
     }
     
-    func showErrorAlert(error: Error?) {
-        var message = "No players found!"
-        if let theError = error {
-            message = theError.localizedDescription
-        }
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
+    func getListOfTeams() {
+        CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
+        TeamRetrievalUtility.sharedInstance.getTeams(completionBlock: { (teams) in
+            CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                self.teams = teams
+                self.navigationItem.rightBarButtonItem = nil
+                self.tableView.reloadData()
+            })
+        }, failureBlock: { (error) in
+            CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
+        })
     }
     
     //MARK: - Table view datasource methods
@@ -72,26 +66,23 @@ class TeamListViewController: UITableViewController {
         if let _ = team.roster {
             self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
         } else {
-            let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
-            loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                URLSession.shared.invalidateAndCancel()
-            }))
-            present(loadingController, animated: true, completion: nil)
+            CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
             TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { (players) in
                 DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: {
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
                         team.roster = players
                         self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
                     })
                 }
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
-                    loadingController.dismiss(animated: true, completion: {
-                        self.showErrorAlert(error: error)
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
                     })
                 }
             })
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

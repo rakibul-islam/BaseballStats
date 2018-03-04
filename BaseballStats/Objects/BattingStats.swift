@@ -9,8 +9,6 @@
 import UIKit
 
 class BattingStats: PlayerStat {
-    var numberFormatter = NumberFormatter()
-    
     var stolenBases: Int
     var caughtStealing: Int
     var runsBattedIn: Int
@@ -20,12 +18,6 @@ class BattingStats: PlayerStat {
         caughtStealing = dictionary["CS"] as? Int ?? 0
         runsBattedIn = dictionary["RBI"] as? Int ?? 0
         super.init(dictionary: dictionary)
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 3
-        numberFormatter.minimumFractionDigits = 3
-        numberFormatter.minimumIntegerDigits = 0
-        numberFormatter.maximumIntegerDigits = 1
     }
     
     //MARK: - Calculated values
@@ -67,27 +59,42 @@ class BattingStats: PlayerStat {
     
     //MARK: - ViewModel methods
     
-    var averageString: String {
+    var averageString: String? {
         get {
-            return numberFormatter.string(from: NSNumber(value: average)) ?? ""
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: average))
         }
     }
     
-    var obpString: String {
+    var obpString: String? {
         get {
-            return numberFormatter.string(from: NSNumber(value: onBasePercentage)) ?? ""
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: onBasePercentage))
         }
     }
     
-    var sluggingString: String {
+    var sluggingString: String? {
         get {
-            return numberFormatter.string(from: NSNumber(value: slugging)) ?? ""
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: slugging))
         }
     }
     
-    var opsString: String {
+    var opsString: String? {
         get {
-            return numberFormatter.string(from: NSNumber(value: ops)) ?? ""
+            return NumberFormatters.battingNumberFormatter.string(from: NSNumber(value: ops))
+        }
+    }
+    
+    override var displayValues: [String?] {
+        get {
+            return ["\(games)",
+                "\(atBats)",
+                "\(hits)",
+                "\(strikeouts)",
+                "\(walks)",
+                "\(homeRuns)",
+                averageString,
+                obpString,
+                sluggingString,
+                opsString]
         }
     }
 }

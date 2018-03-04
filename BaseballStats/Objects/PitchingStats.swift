@@ -9,8 +9,6 @@
 import UIKit
 
 class PitchingStats: PlayerStat {
-    var numberFormatter = NumberFormatter()
-    
     var outs: Int
     var earnedRuns: Int
     var gamesStarted: Int
@@ -32,12 +30,6 @@ class PitchingStats: PlayerStat {
         losses = dictionary["L"] as? Int ?? 0
         saves = dictionary["SV"] as? Int ?? 0
         super.init(dictionary: dictionary)
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.minimumFractionDigits = 2
-        numberFormatter.minimumIntegerDigits = 1
-        numberFormatter.maximumIntegerDigits = 1
     }
     
     //MARK: - Calculated values
@@ -58,9 +50,24 @@ class PitchingStats: PlayerStat {
     
     //MARK: - ViewModel methods
     
-    var eraString: String {
+    var eraString: String? {
         get {
-            return numberFormatter.string(from: NSNumber(value: era)) ?? ""
+            return NumberFormatters.pitchingNumberFormatter.string(from: NSNumber(value: era))
+        }
+    }
+    
+    override var displayValues: [String?] {
+        get {
+            return ["\(games)",
+                "\(gamesStarted)",
+                "\(wins)",
+                "\(losses)",
+                "\(saves)",
+                "\(inningsPitched)",
+                "\(hits)",
+                "\(strikeouts)",
+                "\(walks)",
+                eraString]
         }
     }
 }

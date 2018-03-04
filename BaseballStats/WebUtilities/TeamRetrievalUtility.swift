@@ -14,7 +14,7 @@ class TeamRetrievalUtility {
     
     static let sharedInstance = TeamRetrievalUtility()
     
-    func getTeams(completionBlock: (([Team]) -> Void)?) {
+    func getTeams(completionBlock: (([Team]) -> Void)?, failureBlock: @escaping (Error) -> Void) {
         if teams.count == 0 {
             if let url = URL(string: baseURL) {
                 let session = URLSession.shared
@@ -28,10 +28,10 @@ class TeamRetrievalUtility {
                             }
                             completionBlock?(self.teams)
                         } catch let jsonError {
-                            print(jsonError)
+                            failureBlock(jsonError)
                         }
                     } else if let responseError = error {
-                        print(responseError)
+                        failureBlock(responseError)
                     }
                 })
                 sessionTask.resume()
@@ -60,7 +60,9 @@ class TeamRetrievalUtility {
                         if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [[String: Any]] {
                             var players = [Player]()
                             for playerDictionary in jsonDict {
-                                players.append(Player(dictionary: playerDictionary))
+                                let player = Player(dictionary: playerDictionary)
+                                player.team = team
+                                players.append(player)
                             }
                             completionBlock(players)
                         }
