@@ -14,6 +14,8 @@
 		F26ADD49204B7782009B33CF /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD48204B7782009B33CF /* TeamViewController.swift */; };
 		F26ADD4C204B883F009B33CF /* CommonAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD4B204B883F009B33CF /* CommonAlerts.swift */; };
 		F26ADD4E204BA01A009B33CF /* NumberFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD4D204BA01A009B33CF /* NumberFormatters.swift */; };
+		F26ADD50204BA93F009B33CF /* TeamTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD4F204BA93F009B33CF /* TeamTestCases.swift */; };
+		F26ADD52204BADBE009B33CF /* PlayerTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD51204BADBE009B33CF /* PlayerTestCases.swift */; };
 		F272293D204A1B9F00597B37 /* PlayerStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */; };
 		F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */; };
 		F2E2EB5E2048DA2D00DA213A /* PlayerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5D2048DA2D00DA213A /* PlayerSearchViewController.swift */; };
@@ -21,7 +23,6 @@
 		F2E2EB632048DA2D00DA213A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E2EB612048DA2D00DA213A /* Main.storyboard */; };
 		F2E2EB652048DA2D00DA213A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E2EB642048DA2D00DA213A /* Assets.xcassets */; };
 		F2E2EB682048DA2D00DA213A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E2EB662048DA2D00DA213A /* LaunchScreen.storyboard */; };
-		F2E2EB732048DA2D00DA213A /* BaseballStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB722048DA2D00DA213A /* BaseballStatsTests.swift */; };
 		F2E2EB812048E1EE00DA213A /* PlayerRetrievalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB802048E1EE00DA213A /* PlayerRetrievalUtility.swift */; };
 		F2FA65F1204A62F7001C93EB /* PitchingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA65F0204A62F7001C93EB /* PitchingStats.swift */; };
 		F2FA65F3204A6366001C93EB /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA65F2204A6366001C93EB /* PlayerStat.swift */; };
@@ -45,6 +46,8 @@
 		F26ADD48204B7782009B33CF /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 		F26ADD4B204B883F009B33CF /* CommonAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAlerts.swift; sourceTree = "<group>"; };
 		F26ADD4D204BA01A009B33CF /* NumberFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatters.swift; sourceTree = "<group>"; };
+		F26ADD4F204BA93F009B33CF /* TeamTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTestCases.swift; sourceTree = "<group>"; };
+		F26ADD51204BADBE009B33CF /* PlayerTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTestCases.swift; sourceTree = "<group>"; };
 		F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsViewController.swift; sourceTree = "<group>"; };
 		F2E2EB582048DA2D00DA213A /* BaseballStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,7 +58,6 @@
 		F2E2EB672048DA2D00DA213A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2E2EB692048DA2D00DA213A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2E2EB6E2048DA2D00DA213A /* BaseballStatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseballStatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2E2EB722048DA2D00DA213A /* BaseballStatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballStatsTests.swift; sourceTree = "<group>"; };
 		F2E2EB742048DA2D00DA213A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2E2EB802048E1EE00DA213A /* PlayerRetrievalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRetrievalUtility.swift; sourceTree = "<group>"; };
 		F2FA65F0204A62F7001C93EB /* PitchingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingStats.swift; sourceTree = "<group>"; };
@@ -158,8 +160,9 @@
 		F2E2EB712048DA2D00DA213A /* BaseballStatsTests */ = {
 			isa = PBXGroup;
 			children = (
-				F2E2EB722048DA2D00DA213A /* BaseballStatsTests.swift */,
 				F2E2EB742048DA2D00DA213A /* Info.plist */,
+				F26ADD4F204BA93F009B33CF /* TeamTestCases.swift */,
+				F26ADD51204BADBE009B33CF /* PlayerTestCases.swift */,
 			);
 			path = BaseballStatsTests;
 			sourceTree = "<group>";
@@ -288,7 +291,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2E2EB732048DA2D00DA213A /* BaseballStatsTests.swift in Sources */,
+				F26ADD52204BADBE009B33CF /* PlayerTestCases.swift in Sources */,
+				F26ADD50204BA93F009B33CF /* TeamTestCases.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

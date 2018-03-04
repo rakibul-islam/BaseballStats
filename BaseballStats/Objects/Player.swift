@@ -11,39 +11,39 @@ import UIKit
 class Player {
     var battingStats: [BattingStats]?
     var pitchingStats: [PitchingStats]?
-    var playerID: Int?
-    var lastName: String!
-    var firstName: String!
-    var usesName: String!
+    var playerID: Int
+    var lastName: String?
+    var firstName: String?
+    var usesName: String?
     var middleName: String?
-    var bats: Int!
-    var throwsWith: Int!
-    var teamID: Int?
+    var bats: Int
+    var throwsWith: Int
+    var teamID: Int
     var team: Team?
     var birthDate: Date?
-    var birthCity: String!
-    var birthCountry: String!
-    var birthState: String!
-    var height: Int!
-    var weight: Int?
-    var position: Int!
-    var number: Int?
+    var birthCity: String?
+    var birthCountry: String?
+    var birthState: String?
+    var height: Int
+    var weight: Int
+    var position: Int
+    var number: Int
     var headShotURL: String?
     var isPitcher: Bool
-    var firstInitial: String!
-    var lastInitial: String!
-    var fullName: String!
-    var formalName: String!
+    var firstInitial: String?
+    var lastInitial: String?
+    var fullName: String?
+    var formalName: String?
     
     init(dictionary: [String: Any]) {
-        playerID = dictionary["PlayerID"] as? Int
+        playerID = dictionary["PlayerID"] as? Int ?? 0
         lastName = dictionary["LastName"] as? String
         firstName = dictionary["FirstName"] as? String
         usesName = dictionary["UsesName"] as? String
         middleName = dictionary["MiddleName"] as? String
-        bats = dictionary["Bats"] as? Int
-        throwsWith = dictionary["Throws"] as? Int
-        teamID = dictionary["TeamID"] as? Int
+        bats = dictionary["Bats"] as? Int ?? 0
+        throwsWith = dictionary["Throws"] as? Int ?? 0
+        teamID = dictionary["TeamID"] as? Int ?? 0
         if let date = dictionary["BirthDate"] as? String {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -53,9 +53,9 @@ class Player {
         birthCountry = dictionary["BirthCountry"] as? String
         birthState = dictionary["BirthState"] as? String
         height = dictionary["Height"] as? Int ?? 0
-        weight = dictionary["Weight"] as? Int
+        weight = dictionary["Weight"] as? Int ?? 0
         position = dictionary["Position"] as? Int ?? 0
-        number = dictionary["Number"] as? Int
+        number = dictionary["Number"] as? Int ?? -1
         headShotURL = dictionary["HeadShotURL"] as? String
         isPitcher = dictionary["IsPitcher"] as? Bool ?? false
         firstInitial = dictionary["FirstInitial"] as? String
@@ -65,9 +65,12 @@ class Player {
     }
     
     //MARK: - ViewModel methods
-    var displayName: String {
+    var displayName: String? {
         get {
-            return usesName + " " + lastName
+            guard let displayFirst = usesName, let displayLast = lastName else {
+                return nil
+            }
+            return displayFirst + " " + displayLast
         }
     }
     var positionName: String {
@@ -102,16 +105,19 @@ class Player {
             }
         }
     }
-    var teamAndNumber: String {
+    var teamAndNumber: String? {
         get {
-            guard let num = number, let teamName = team?.fullName else {
-                return ""
+            guard number >= 0, let teamName = team?.fullName else {
+                return nil
             }
-            return "#\(num) - \(teamName)"
+            return "#\(number) - \(teamName)"
         }
     }
-    var batsAndThrows: String {
+    var batsAndThrows: String? {
         get {
+            guard bats > 0, throwsWith > 0 else {
+                return nil
+            }
             let batting = bats == 1 ? "R" : bats == 2 ? "L" : "S"
             let throwing = throwsWith == 1 ? "R" : "L"
             return isPitcher ? "Throws: \(throwing)  Bats: \(batting)" : "Bats: \(batting)  Throws: \(throwing)"
@@ -132,7 +138,7 @@ class Player {
         get {
             let feet = height / 12
             let inches = height % 12
-            return "\(feet)-\(inches), \(weight ?? 0) lbs."
+            return "\(feet)-\(inches), \(weight) lbs."
         }
     }
 }
