@@ -26,12 +26,14 @@ class TeamListViewController: UITableViewController {
 
     func getListOfTeams() {
         CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
-        TeamRetrievalUtility.sharedInstance.getTeams { (teams) in
+        TeamRetrievalUtility.sharedInstance.getTeams(completionBlock: { (teams) in
             CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
                 self.teams = teams
                 self.tableView.reloadData()
             })
-        }
+        }, failureBlock: { (error) in
+            CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
+        })
     }
     
     //MARK: - Table view datasource methods
