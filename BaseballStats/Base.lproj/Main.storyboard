@@ -502,8 +502,15 @@
                             <outlet property="delegate" destination="qMK-Az-m9C" id="NwJ-X7-mB8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Teams" id="0fW-U3-Kxk"/>
+                    <navigationItem key="navigationItem" title="Teams" id="0fW-U3-Kxk">
+                        <barButtonItem key="rightBarButtonItem" title="Retry" style="plain" id="fcR-GF-Sxy">
+                            <connections>
+                                <action selector="redoBarButtonItemClicked:" destination="qMK-Az-m9C" id="WnL-qa-fKL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="redoBarButtonItem" destination="fcR-GF-Sxy" id="QIh-Qa-x2S"/>
                         <segue destination="uPG-fo-FCW" kind="show" identifier="showTeamRoster" id="ErL-V7-nqj"/>
                     </connections>
                 </tableViewController>

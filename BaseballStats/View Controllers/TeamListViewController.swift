@@ -11,6 +11,7 @@ import UIKit
 class TeamListViewController: UITableViewController {
     var teams = [Team]()
     var selectedTeam: Team?
+    @IBOutlet weak var redoBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +25,16 @@ class TeamListViewController: UITableViewController {
         }
     }
 
+    @IBAction func redoBarButtonItemClicked(_ sender: Any) {
+        getListOfTeams()
+    }
+    
     func getListOfTeams() {
         CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
         TeamRetrievalUtility.sharedInstance.getTeams(completionBlock: { (teams) in
             CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
                 self.teams = teams
+                self.navigationItem.rightBarButtonItem = nil
                 self.tableView.reloadData()
             })
         }, failureBlock: { (error) in
