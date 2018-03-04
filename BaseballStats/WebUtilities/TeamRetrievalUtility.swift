@@ -44,15 +44,6 @@ class TeamRetrievalUtility {
         }
     }
     
-    func getTeamForId(teamID: Int?) -> TeamMO? {
-        guard let teamId = teamID else {
-            return nil
-        }
-        return teams.first(where: { (team) -> Bool in
-            return team.teamID == teamId
-        })
-    }
-    
     func getRosterFor(team: TeamMO, completionBlock: @escaping () -> Void, failureBlock: @escaping (Error) -> Void) {
         let urlString = "\(baseURL)/\(team.teamID)/roster"
         if let url = URL(string: urlString) {
