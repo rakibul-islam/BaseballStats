@@ -81,9 +81,9 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     //MARK: - UITableView delegate methods
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPlayer = players[indexPath.row]
-        if let _ = selectedPlayer?.battingStats {
+        if let battingStats = selectedPlayer?.battingStats, battingStats.count > 0 {
             performSegue(withIdentifier: "showPlayerInfo", sender: nil)
-        } else if let _ = selectedPlayer?.pitchingStats {
+        } else if let pitchingStats = selectedPlayer?.pitchingStats, pitchingStats.count > 0 {
             performSegue(withIdentifier: "showPlayerInfo", sender: nil)
         } else {
             getStatsForSelectedPlayer()
