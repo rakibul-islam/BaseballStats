@@ -67,11 +67,13 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let playerCell = tableView.dequeueReusableCell(withIdentifier: "playerCell")
+        guard let playerCell = tableView.dequeueReusableCell(withIdentifier: "playerCell") else {
+            return UITableViewCell()
+        }
         let player = players[indexPath.row]
-        playerCell?.textLabel?.text = player.displayName
-        playerCell?.detailTextLabel?.text = player.positionName
-        return playerCell!
+        playerCell.textLabel?.text = player.displayName
+        playerCell.detailTextLabel?.text = player.positionName
+        return playerCell
     }
     
     //MARK: - UITableView delegate methods
