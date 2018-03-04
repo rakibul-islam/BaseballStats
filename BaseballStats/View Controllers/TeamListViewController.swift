@@ -70,7 +70,7 @@ class TeamListViewController: UITableViewController {
             TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { () in
                 DispatchQueue.main.async {
                     CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-//                        self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
+                        self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
                     })
                 }
             }, failureBlock: { (error) in

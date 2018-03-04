@@ -23,7 +23,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let statsVC = segue.destination as? PlayerStatsViewController {
-            statsVC.player = selectedPlayer
+//            statsVC.player = selectedPlayer
             let backButtonItem = UIBarButtonItem()
             backButtonItem.title = "Roster"
             navigationItem.backBarButtonItem = backButtonItem
@@ -49,9 +49,9 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - UITableView delegate methods
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPlayer = team?.roster?[indexPath.row] as? PlayerMO
-        if let _ = selectedPlayer?.battingStats {
+        if let battingStats = selectedPlayer?.battingStats, battingStats.count > 0 {
             performSegue(withIdentifier: "showPlayerInfo", sender: nil)
-        } else if let _ = selectedPlayer?.pitchingStats {
+        } else if let pitchingStats = selectedPlayer?.pitchingStats, pitchingStats.count > 0 {
             performSegue(withIdentifier: "showPlayerInfo", sender: nil)
         } else {
             getStatsForSelectedPlayer()
@@ -62,22 +62,18 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Other methods
     func getStatsForSelectedPlayer() {
         CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
-        if let playerID = selectedPlayer?.playerID {
-            playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
-                self.selectedPlayer?.battingStats = battingStats
-                self.selectedPlayer?.pitchingStats = pitchingStats
-                DispatchQueue.main.async {
-                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
-                    })
-                }
-            }, failureBlock: { (error) in
-                DispatchQueue.main.async {
-                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
-                    })
-                }
-            })
-        }
+        playerRetrievalUtility.getStats(for: selectedPlayer, completionBlock: {
+            DispatchQueue.main.async {
+                CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+//                    self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+                })
+            }
+        }, failureBlock: { (error) in
+            DispatchQueue.main.async {
+                CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                    CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
+                })
+            }
+        })
     }
 }

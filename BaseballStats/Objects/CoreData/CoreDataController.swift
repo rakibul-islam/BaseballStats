@@ -71,7 +71,7 @@ class CoreDataController {
     }
     
     func addTeamFrom(dictionary: [String: Any]) {
-        let teamMO = getTeamFor(teamID: dictionary["TeamID"] as? Int) ?? createTeamEntity()
+        let teamMO = getTeamFor(team: dictionary["TeamID"]) ?? createTeamEntity()
         teamMO.setupTeamFrom(dictionary: dictionary)
         saveContext()
     }
@@ -89,6 +89,20 @@ class CoreDataController {
         saveContext()
     }
     
+    func addBattingStatFor(player: PlayerMO, with dictionary: [String: Any]) {
+        let battingStatMO = getBattingStatFor(player: player, for: dictionary["YearID"]) ?? createBattingStatEntity()
+        battingStatMO.setupBattingFrom(dictionary: dictionary)
+        battingStatMO.player = player
+        saveContext()
+    }
+    
+    func addPitchingStatFor(player: PlayerMO, with dictionary: [String: Any]) {
+        let pitchingStatMO = getPitchingStatFor(player: player, for: dictionary["YearID"]) ?? createPitchingStatEntity()
+        pitchingStatMO.setupPitchingFrom(dictionary: dictionary)
+        pitchingStatMO.player = player
+        saveContext()
+    }
+    
     func getAllTeams() -> [TeamMO] {
         let teamFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team")
         var teams = [TeamMO]()
@@ -103,12 +117,12 @@ class CoreDataController {
         return teams
     }
     
-    func getTeamFor(teamID: Int?) -> TeamMO? {
-        guard let team = teamID else {
+    func getTeamFor(team: Any?) -> TeamMO? {
+        guard let teamID = team as? Int, teamID > 0 else {
             return nil
         }
         let teamFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team")
-        teamFetchRequest.predicate = NSPredicate(format: "teamID == %d", team)
+        teamFetchRequest.predicate = NSPredicate(format: "teamID == %d", teamID)
         do {
             if let fetchResult = try managedObjectContext.fetch(teamFetchRequest) as? [TeamMO] {
                 return fetchResult.last
@@ -120,7 +134,7 @@ class CoreDataController {
     }
     
     func getPlayerFor(player: Any?) -> PlayerMO? {
-        guard let playerID = player as? Int else {
+        guard let playerID = player as? Int, playerID > 0 else {
             return nil
         }
         let playerFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
@@ -135,11 +149,51 @@ class CoreDataController {
         return nil
     }
     
+    func getBattingStatFor(player: PlayerMO, for year: Any?) -> BattingStatMO? {
+        guard let yearID = year as? Int16 else {
+            return nil
+        }
+        let statFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BattingStat")
+        statFetchRequest.predicate = NSPredicate(format: "playerID == %d AND yearID == %d", player.playerID, yearID)
+        do {
+            if let fetchResult = try managedObjectContext.fetch(statFetchRequest) as? [BattingStatMO] {
+                return fetchResult.last
+            }
+        } catch {
+            return nil
+        }
+        return nil
+    }
+    
+    func getPitchingStatFor(player: PlayerMO, for year: Any?) -> PitchingStatMO? {
+        guard let yearID = year as? Int16 else {
+            return nil
+        }
+        let statFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PitchingStat")
+        statFetchRequest.predicate = NSPredicate(format: "playerID == %d AND yearID == %d", player.playerID, yearID)
+        do {
+            if let fetchResult = try managedObjectContext.fetch(statFetchRequest) as? [PitchingStatMO] {
+                return fetchResult.last
+            }
+        } catch {
+            return nil
+        }
+        return nil
+    }
+    
     func createTeamEntity() -> TeamMO {
         return NSEntityDescription.insertNewObject(forEntityName: "Team", into: self.managedObjectContext) as! TeamMO
     }
     
     func createPlayerEntity() -> PlayerMO {
         return NSEntityDescription.insertNewObject(forEntityName: "Player", into: self.managedObjectContext) as! PlayerMO
+    }
+    
+    func createBattingStatEntity() -> BattingStatMO {
+        return NSEntityDescription.insertNewObject(forEntityName: "BattingStat", into: self.managedObjectContext) as! BattingStatMO
+    }
+    
+    func createPitchingStatEntity() -> PitchingStatMO {
+        return NSEntityDescription.insertNewObject(forEntityName: "PitchingStat", into: managedObjectContext) as! PitchingStatMO
     }
 }

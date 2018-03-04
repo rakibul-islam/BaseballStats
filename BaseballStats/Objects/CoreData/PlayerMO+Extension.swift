@@ -10,7 +10,7 @@ import Foundation
 
 extension PlayerMO {
     func setupFrom(dictionary: [String: Any]) {
-        playerID = dictionary["PlayerID"] as? Int16 ?? 0
+        playerID = dictionary["PlayerID"] as? Int32 ?? 0
         lastName = dictionary["LastName"] as? String
         firstName = dictionary["FirstName"] as? String
         usesName = dictionary["UsesName"] as? String

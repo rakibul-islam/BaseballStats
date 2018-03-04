@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		F201ED06204C5C3400B3BAC5 /* TeamMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED05204C5C3400B3BAC5 /* TeamMO+Extension.swift */; };
 		F201ED08204C76FA00B3BAC5 /* PlayerMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED07204C76FA00B3BAC5 /* PlayerMO+Extension.swift */; };
+		F201ED0A204C803600B3BAC5 /* PlayerStatMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED09204C803600B3BAC5 /* PlayerStatMO+Extension.swift */; };
+		F201ED0C204C833A00B3BAC5 /* BattingStatsMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED0B204C833A00B3BAC5 /* BattingStatsMO+Extension.swift */; };
+		F201ED0E204C857100B3BAC5 /* PitchingStatMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED0D204C857100B3BAC5 /* PitchingStatMO+Extension.swift */; };
 		F233F4C02048F31D008AD38E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233F4BF2048F31D008AD38E /* Player.swift */; };
 		F264E531204902E30032ABDE /* BattingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264E530204902E30032ABDE /* BattingStats.swift */; };
 		F26ADD44204A7FDA009B33CF /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD43204A7FDA009B33CF /* Team.swift */; };
@@ -45,6 +48,9 @@
 /* Begin PBXFileReference section */
 		F201ED05204C5C3400B3BAC5 /* TeamMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeamMO+Extension.swift"; sourceTree = "<group>"; };
 		F201ED07204C76FA00B3BAC5 /* PlayerMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerMO+Extension.swift"; sourceTree = "<group>"; };
+		F201ED09204C803600B3BAC5 /* PlayerStatMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerStatMO+Extension.swift"; sourceTree = "<group>"; };
+		F201ED0B204C833A00B3BAC5 /* BattingStatsMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BattingStatsMO+Extension.swift"; sourceTree = "<group>"; };
+		F201ED0D204C857100B3BAC5 /* PitchingStatMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PitchingStatMO+Extension.swift"; sourceTree = "<group>"; };
 		F233F4BF2048F31D008AD38E /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F264E530204902E30032ABDE /* BattingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattingStats.swift; sourceTree = "<group>"; };
 		F26ADD43204A7FDA009B33CF /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -135,6 +141,9 @@
 				F26ADD58204BBFF3009B33CF /* CoreDataController.swift */,
 				F201ED05204C5C3400B3BAC5 /* TeamMO+Extension.swift */,
 				F201ED07204C76FA00B3BAC5 /* PlayerMO+Extension.swift */,
+				F201ED09204C803600B3BAC5 /* PlayerStatMO+Extension.swift */,
+				F201ED0B204C833A00B3BAC5 /* BattingStatsMO+Extension.swift */,
+				F201ED0D204C857100B3BAC5 /* PitchingStatMO+Extension.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -307,12 +316,15 @@
 				F264E531204902E30032ABDE /* BattingStats.swift in Sources */,
 				F26ADD4E204BA01A009B33CF /* NumberFormatters.swift in Sources */,
 				F2FA65F1204A62F7001C93EB /* PitchingStats.swift in Sources */,
+				F201ED0C204C833A00B3BAC5 /* BattingStatsMO+Extension.swift in Sources */,
 				F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */,
 				F2E2EB812048E1EE00DA213A /* PlayerRetrievalUtility.swift in Sources */,
 				F26ADD59204BBFF3009B33CF /* CoreDataController.swift in Sources */,
 				F201ED08204C76FA00B3BAC5 /* PlayerMO+Extension.swift in Sources */,
 				F26ADD47204A80E3009B33CF /* TeamRetrievalUtility.swift in Sources */,
+				F201ED0A204C803600B3BAC5 /* PlayerStatMO+Extension.swift in Sources */,
 				F233F4C02048F31D008AD38E /* Player.swift in Sources */,
+				F201ED0E204C857100B3BAC5 /* PitchingStatMO+Extension.swift in Sources */,
 				F26ADD4C204B883F009B33CF /* CommonAlerts.swift in Sources */,
 				F26ADD44204A7FDA009B33CF /* Team.swift in Sources */,
 				F2E2EB5E2048DA2D00DA213A /* PlayerSearchViewController.swift in Sources */,
