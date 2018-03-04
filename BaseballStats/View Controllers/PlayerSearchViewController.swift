@@ -32,21 +32,21 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
             searchBar.resignFirstResponder()
-            LoadingAlert.sharedInstance.showAlertOn(viewController: self)
+            CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
             playerRetrievalUtility.getPlayersWith(searchParameter: searchText, completionBlock: { (players) in
                 self.players = players
                 DispatchQueue.main.async {
-                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
                         if players.count == 0 {
-                            self.showErrorAlert(error: nil)
+                            CommonAlerts.showErrorAlertOn(viewController: self, messageString: "No players found!", error: nil)
                         }
                         self.tableView.reloadData()
                     })
                 }
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
-                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
-                        self.showErrorAlert(error: error)
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
                     })
                 }
             })
@@ -89,33 +89,23 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     
     //MARK: - Other methods
     func getStatsForSelectedPlayer() {
-        LoadingAlert.sharedInstance.showAlertOn(viewController: self)
+        CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
         if let playerID = selectedPlayer?.playerID {
             playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
                 self.selectedPlayer?.battingStats = battingStats
                 self.selectedPlayer?.pitchingStats = pitchingStats
                 DispatchQueue.main.async {
-                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
                         self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
                     })
                 }
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
-                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
-                        self.showErrorAlert(error: error)
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
                     })
                 }
             })
         }
-    }
-    
-    func showErrorAlert(error: Error?) {
-        var message = "No players found!"
-        if let theError = error {
-            message = theError.localizedDescription
-        }
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
     }
 }

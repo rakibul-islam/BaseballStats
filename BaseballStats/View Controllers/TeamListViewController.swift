@@ -25,23 +25,13 @@ class TeamListViewController: UITableViewController {
     }
 
     func getListOfTeams() {
-        LoadingAlert.sharedInstance.showAlertOn(viewController: self)
+        CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
         TeamRetrievalUtility.sharedInstance.getTeams { (teams) in
-            LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
+            CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
                 self.teams = teams
                 self.tableView.reloadData()
             })
         }
-    }
-    
-    func showErrorAlert(error: Error?) {
-        var message = "No players found!"
-        if let theError = error {
-            message = theError.localizedDescription
-        }
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - Table view datasource methods
@@ -68,18 +58,18 @@ class TeamListViewController: UITableViewController {
         if let _ = team.roster {
             self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
         } else {
-            LoadingAlert.sharedInstance.showAlertOn(viewController: self)
+            CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
             TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { (players) in
                 DispatchQueue.main.async {
-                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
                         team.roster = players
                         self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
                     })
                 }
             }, failureBlock: { (error) in
                 DispatchQueue.main.async {
-                    LoadingAlert.sharedInstance.dismissAlert(completionBlock: {
-                        self.showErrorAlert(error: error)
+                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
                     })
                 }
             })
