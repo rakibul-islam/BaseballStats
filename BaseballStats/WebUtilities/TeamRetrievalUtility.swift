@@ -14,7 +14,7 @@ class TeamRetrievalUtility {
     
     static let sharedInstance = TeamRetrievalUtility()
     
-    func getTeamsFromAPI() {
+    func getTeams(completionBlock: (([Team]) -> Void)?) {
         if teams.count == 0 {
             if let url = URL(string: baseURL) {
                 let session = URLSession.shared
@@ -26,6 +26,7 @@ class TeamRetrievalUtility {
                                     self.teams.append(Team(dictionary: teamDictionary))
                                 }
                             }
+                            completionBlock?(self.teams)
                         } catch let jsonError {
                             print(jsonError)
                         }
@@ -35,10 +36,40 @@ class TeamRetrievalUtility {
                 })
                 sessionTask.resume()
             }
+        } else {
+            completionBlock?(self.teams)
         }
     }
     
-    func getTeamList() -> [Team] {
-        return teams
+    func getTeamForId(teamID: Int) -> Team? {
+        return teams.first(where: { (team) -> Bool in
+            return team.teamID == teamID
+        })
+    }
+    
+    func getRosterFor(team: Team, completionBlock: @escaping ([Player]) -> Void, failureBlock: @escaping (Error) -> Void) {
+        let urlString = "\(baseURL)/\(team.teamID)/roster"
+        if let url = URL(string: urlString) {
+            let session = URLSession.shared
+            let sessionTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+                if let responseData = data {
+                    do {
+                        if let jsonDict = try JSONSerialization.jsonObject(with: responseData, options: []) as? [[String: Any]] {
+                            var players = [Player]()
+                            for playerDictionary in jsonDict {
+                                players.append(Player(dictionary: playerDictionary))
+                            }
+                            completionBlock(players)
+                        }
+                    } catch let jsonError {
+                        failureBlock(jsonError)
+                    }
+                } else if let responseError = error {
+                    failureBlock(responseError)
+                }
+            })
+            sessionTask.resume()
+        }
+        
     }
 }

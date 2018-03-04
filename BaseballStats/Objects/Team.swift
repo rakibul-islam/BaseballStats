@@ -16,6 +16,8 @@ class Team {
     var leagueID: Int
     var fullName: String?
     
+    var roster: [Player]?
+    
     init(dictionary: [String: Any]) {
         teamID = dictionary["TeamID"] as? Int ?? 0
         city = dictionary["City"] as? String
@@ -23,5 +25,15 @@ class Team {
         abbreviation = dictionary["Abbr"] as? String
         leagueID = dictionary["LeagueID"] as? Int ?? 0
         fullName = dictionary["FullName"] as? String
+    }
+    
+    //MARK: - ViewModel methods
+    var league: String {
+        get {
+            guard leagueID > 0 else {
+                return "Unknown"
+            }
+            return leagueID == 1 ? "American League" : "National League"
+        }
     }
 }
