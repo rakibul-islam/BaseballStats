@@ -66,7 +66,7 @@ class PlayerStat {
     }
     
     //MARK: - ViewModel methods
-    var displayValues: [String] {
+    var displayValues: [String?] {
         get {
             return [String](repeating: "", count: 10)
         }

@@ -503,7 +503,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Teams" id="0fW-U3-Kxk">
-                        <barButtonItem key="rightBarButtonItem" title="Retry" style="plain" id="fcR-GF-Sxy">
+                        <barButtonItem key="rightBarButtonItem" title="Retry" id="fcR-GF-Sxy">
                             <connections>
                                 <action selector="redoBarButtonItemClicked:" destination="qMK-Az-m9C" id="WnL-qa-fKL"/>
                             </connections>
