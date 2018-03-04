@@ -90,4 +90,19 @@ class BattingStats: PlayerStat {
             return numberFormatter.string(from: NSNumber(value: ops)) ?? ""
         }
     }
+    
+    override var displayValues: [String] {
+        get {
+            return ["\(games)",
+                "\(atBats)",
+                "\(hits)",
+                "\(strikeouts)",
+                "\(walks)",
+                "\(homeRuns)",
+                averageString,
+                obpString,
+                sluggingString,
+                opsString]
+        }
+    }
 }

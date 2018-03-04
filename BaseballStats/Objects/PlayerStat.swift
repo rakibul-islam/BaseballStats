@@ -64,4 +64,11 @@ class PlayerStat {
             return walksRegular + walksIntentional
         }
     }
+    
+    //MARK: - ViewModel methods
+    var displayValues: [String] {
+        get {
+            return [String](repeating: "", count: 10)
+        }
+    }
 }

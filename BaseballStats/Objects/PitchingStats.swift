@@ -63,4 +63,19 @@ class PitchingStats: PlayerStat {
             return numberFormatter.string(from: NSNumber(value: era)) ?? ""
         }
     }
+    
+    override var displayValues: [String] {
+        get {
+            return ["\(games)",
+                "\(gamesStarted)",
+                "\(wins)",
+                "\(losses)",
+                "\(saves)",
+                "\(inningsPitched)",
+                "\(hits)",
+                "\(strikeouts)",
+                "\(walks)",
+                eraString]
+        }
+    }
 }
