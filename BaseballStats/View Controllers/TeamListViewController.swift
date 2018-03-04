@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UITableViewController {
+class TeamListViewController: UITableViewController {
     var teams = [Team]()
     
     override func viewDidLoad() {

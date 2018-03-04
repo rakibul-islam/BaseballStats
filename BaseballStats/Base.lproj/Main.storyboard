@@ -453,7 +453,7 @@
         <!--Teams-->
         <scene sceneID="ra2-No-yBT">
             <objects>
-                <tableViewController id="qMK-Az-m9C" customClass="SecondViewController" customModule="BaseballStats" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="qMK-Az-m9C" customClass="TeamListViewController" customModule="BaseballStats" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pug-hC-jP4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
