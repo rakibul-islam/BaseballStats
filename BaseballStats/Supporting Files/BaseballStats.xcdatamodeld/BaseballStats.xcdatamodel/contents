@@ -64,7 +64,7 @@
         <attribute name="walksIntentional" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="walksRegular" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="yearID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" syncable="YES"/>
+        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="stats" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="Team" representedClassName="TeamMO" syncable="YES" codeGenerationType="class">
         <attribute name="abbreviation" optional="YES" attributeType="String" syncable="YES"/>
@@ -74,12 +74,13 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teamID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="roster" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Player" inverseName="team" inverseEntity="Player" syncable="YES"/>
+        <relationship name="stats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerStat" inverseName="team" inverseEntity="PlayerStat" syncable="YES"/>
     </entity>
     <elements>
         <element name="BattingStat" positionX="-36" positionY="153" width="128" height="105"/>
         <element name="PitchingStat" positionX="-18" positionY="162" width="128" height="195"/>
         <element name="Player" positionX="-63" positionY="27" width="128" height="420"/>
         <element name="PlayerStat" positionX="-45" positionY="144" width="128" height="330"/>
-        <element name="Team" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Team" positionX="-63" positionY="-18" width="128" height="165"/>
     </elements>
 </model>
