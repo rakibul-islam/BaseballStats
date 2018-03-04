@@ -34,7 +34,9 @@ class PlayerStat {
         yearID = dictionary["YearID"] as? Int ?? 0
         levelID = dictionary["LevelID"] as? Int
         teamID = dictionary["TeamID"] as? Int
-        team = TeamRetrievalUtility.sharedInstance.getTeamForId(teamID: teamID)
+        if let teamDictionary = dictionary["Team"] as? [String: Any] {
+            team = Team(dictionary: teamDictionary)
+        }
         games = dictionary["G"] as? Int ?? 0
         atBats = dictionary["AB"] as? Int ?? 0
         singles = dictionary["B1"] as? Int ?? 0
