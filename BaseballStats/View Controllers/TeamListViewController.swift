@@ -10,6 +10,7 @@ import UIKit
 
 class TeamListViewController: UITableViewController {
     var teams = [Team]()
+    var selectedTeam: Team?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,9 +18,10 @@ class TeamListViewController: UITableViewController {
         getListOfTeams()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let teamVC = segue.destination as? TeamViewController {
+            teamVC.team = selectedTeam
+        }
     }
 
     func getListOfTeams() {
@@ -65,25 +67,31 @@ class TeamListViewController: UITableViewController {
     
     //MARK: - Table view delegate methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
-        loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            URLSession.shared.invalidateAndCancel()
-        }))
-        present(loadingController, animated: true, completion: nil)
         let team = teams[indexPath.row]
-        TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { (players) in
-            DispatchQueue.main.async {
-                loadingController.dismiss(animated: true, completion: {
-                    team.roster = players
-                })
-            }
-        }, failureBlock: { (error) in
-            DispatchQueue.main.async {
-                loadingController.dismiss(animated: true, completion: {
-                    self.showErrorAlert(error: error)
-                })
-            }
-        })
+        selectedTeam = team
+        if let _ = team.roster {
+            self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
+        } else {
+            let loadingController = UIAlertController(title: "Loading", message: nil, preferredStyle: .alert)
+            loadingController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                URLSession.shared.invalidateAndCancel()
+            }))
+            present(loadingController, animated: true, completion: nil)
+            TeamRetrievalUtility.sharedInstance.getRosterFor(team: team, completionBlock: { (players) in
+                DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: {
+                        team.roster = players
+                        self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
+                    })
+                }
+            }, failureBlock: { (error) in
+                DispatchQueue.main.async {
+                    loadingController.dismiss(animated: true, completion: {
+                        self.showErrorAlert(error: error)
+                    })
+                }
+            })
+        }
     }
 }
 
