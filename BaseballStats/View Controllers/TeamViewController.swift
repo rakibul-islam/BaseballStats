@@ -18,12 +18,15 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.title = team?.abbreviation
+        self.title = team?.name
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let statsVC = segue.destination as? PlayerStatsViewController {
             statsVC.player = selectedPlayer
+            let backButtonItem = UIBarButtonItem()
+            backButtonItem.title = "Roster"
+            navigationItem.backBarButtonItem = backButtonItem
         }
     }
     
