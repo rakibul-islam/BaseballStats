@@ -42,6 +42,23 @@ class CoreDataController {
         }
     }
     
+    func setupInMemoryManagedObjectContext() {
+        guard let modelURL = Bundle.main.url(forResource: "BaseballStats", withExtension: "momd") else {
+            fatalError("Error loading model from bundle")
+        }
+        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalError("Error initializing mom from: \(modelURL)")
+        }
+        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: mom)
+        managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+        do {
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+        } catch {
+            fatalError("Error migrating store: \(error)")
+        }
+    }
+    
     func saveContext() {
         if managedObjectContext.hasChanges {
             managedObjectContext.performAndWait {

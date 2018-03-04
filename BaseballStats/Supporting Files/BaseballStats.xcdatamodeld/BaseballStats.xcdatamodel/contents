@@ -34,7 +34,7 @@
         <attribute name="lastInitial" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="middleName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="playerID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="position" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="teamID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -76,10 +76,10 @@
         <relationship name="roster" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Player" inverseName="team" inverseEntity="Player" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Player" positionX="-63" positionY="27" width="128" height="420"/>
-        <element name="Team" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="PlayerStat" positionX="-45" positionY="144" width="128" height="330"/>
         <element name="BattingStat" positionX="-36" positionY="153" width="128" height="105"/>
         <element name="PitchingStat" positionX="-18" positionY="162" width="128" height="195"/>
+        <element name="Player" positionX="-63" positionY="27" width="128" height="420"/>
+        <element name="PlayerStat" positionX="-45" positionY="144" width="128" height="330"/>
+        <element name="Team" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

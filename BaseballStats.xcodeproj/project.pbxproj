@@ -12,9 +12,7 @@
 		F201ED0A204C803600B3BAC5 /* PlayerStatMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED09204C803600B3BAC5 /* PlayerStatMO+Extension.swift */; };
 		F201ED0C204C833A00B3BAC5 /* BattingStatsMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED0B204C833A00B3BAC5 /* BattingStatsMO+Extension.swift */; };
 		F201ED0E204C857100B3BAC5 /* PitchingStatMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED0D204C857100B3BAC5 /* PitchingStatMO+Extension.swift */; };
-		F233F4C02048F31D008AD38E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233F4BF2048F31D008AD38E /* Player.swift */; };
 		F264E531204902E30032ABDE /* BattingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264E530204902E30032ABDE /* BattingStats.swift */; };
-		F26ADD44204A7FDA009B33CF /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD43204A7FDA009B33CF /* Team.swift */; };
 		F26ADD47204A80E3009B33CF /* TeamRetrievalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD46204A80E3009B33CF /* TeamRetrievalUtility.swift */; };
 		F26ADD49204B7782009B33CF /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD48204B7782009B33CF /* TeamViewController.swift */; };
 		F26ADD4C204B883F009B33CF /* CommonAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD4B204B883F009B33CF /* CommonAlerts.swift */; };
@@ -51,9 +49,7 @@
 		F201ED09204C803600B3BAC5 /* PlayerStatMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerStatMO+Extension.swift"; sourceTree = "<group>"; };
 		F201ED0B204C833A00B3BAC5 /* BattingStatsMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BattingStatsMO+Extension.swift"; sourceTree = "<group>"; };
 		F201ED0D204C857100B3BAC5 /* PitchingStatMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PitchingStatMO+Extension.swift"; sourceTree = "<group>"; };
-		F233F4BF2048F31D008AD38E /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F264E530204902E30032ABDE /* BattingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattingStats.swift; sourceTree = "<group>"; };
-		F26ADD43204A7FDA009B33CF /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		F26ADD46204A80E3009B33CF /* TeamRetrievalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRetrievalUtility.swift; sourceTree = "<group>"; };
 		F26ADD48204B7782009B33CF /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 		F26ADD4B204B883F009B33CF /* CommonAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAlerts.swift; sourceTree = "<group>"; };
@@ -96,15 +92,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F201ED0F204CA29F00B3BAC5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F2FA65F2204A6366001C93EB /* PlayerStat.swift */,
+				F2FA65F0204A62F7001C93EB /* PitchingStats.swift */,
+				F264E530204902E30032ABDE /* BattingStats.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		F233F4BE2048F31D008AD38E /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				F201ED0F204CA29F00B3BAC5 /* ViewModels */,
 				F26ADD57204BBFD7009B33CF /* CoreData */,
-				F233F4BF2048F31D008AD38E /* Player.swift */,
-				F264E530204902E30032ABDE /* BattingStats.swift */,
-				F2FA65F0204A62F7001C93EB /* PitchingStats.swift */,
-				F2FA65F2204A6366001C93EB /* PlayerStat.swift */,
-				F26ADD43204A7FDA009B33CF /* Team.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -323,10 +325,8 @@
 				F201ED08204C76FA00B3BAC5 /* PlayerMO+Extension.swift in Sources */,
 				F26ADD47204A80E3009B33CF /* TeamRetrievalUtility.swift in Sources */,
 				F201ED0A204C803600B3BAC5 /* PlayerStatMO+Extension.swift in Sources */,
-				F233F4C02048F31D008AD38E /* Player.swift in Sources */,
 				F201ED0E204C857100B3BAC5 /* PitchingStatMO+Extension.swift in Sources */,
 				F26ADD4C204B883F009B33CF /* CommonAlerts.swift in Sources */,
-				F26ADD44204A7FDA009B33CF /* Team.swift in Sources */,
 				F2E2EB5E2048DA2D00DA213A /* PlayerSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
