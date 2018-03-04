@@ -41,9 +41,12 @@ class TeamRetrievalUtility {
         }
     }
     
-    func getTeamForId(teamID: Int) -> Team? {
+    func getTeamForId(teamID: Int?) -> Team? {
+        guard let teamId = teamID else {
+            return nil
+        }
         return teams.first(where: { (team) -> Bool in
-            return team.teamID == teamID
+            return team.teamID == teamId
         })
     }
     

@@ -20,6 +20,7 @@ class PlayerStatsViewController: UIViewController {
     @IBOutlet weak var yearSegmentedControl: UISegmentedControl!
     @IBOutlet var headerLabels: [UILabel]!
     @IBOutlet var statsLabels: [UILabel]!
+    @IBOutlet weak var previousTeamLabel: UILabel!
     
     var player: Player?
     var pitcher = false
@@ -87,6 +88,10 @@ class PlayerStatsViewController: UIViewController {
                     statsLabels[7].text = "\(pitchingStats.strikeouts)"
                     statsLabels[8].text = "\(pitchingStats.walks)"
                     statsLabels[9].text = "\(pitchingStats.eraString)"
+                    if let currentTeamId = player?.teamID, let statTeamId = pitchingStats.teamID {
+                        previousTeamLabel.isHidden = currentTeamId == statTeamId
+                        previousTeamLabel.text = "Member of: \(pitchingStats.team?.fullName ?? "")"
+                    }
                 }
             } else {
                 if let battingStatsArray = player?.battingStats, battingStatsArray.count > 0 {
@@ -101,6 +106,10 @@ class PlayerStatsViewController: UIViewController {
                     statsLabels[7].text = battingStats.obpString
                     statsLabels[8].text = battingStats.sluggingString
                     statsLabels[9].text = battingStats.opsString
+                    if let currentTeamId = player?.teamID, let statTeamId = battingStats.teamID {
+                        previousTeamLabel.isHidden = currentTeamId == statTeamId
+                        previousTeamLabel.text = "Member of: \(battingStats.team?.fullName ?? "")"
+                    }
                 }
             }
         }

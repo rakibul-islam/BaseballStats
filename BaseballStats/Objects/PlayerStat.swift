@@ -12,7 +12,8 @@ class PlayerStat {
     var playerID: Int!
     var yearID: Int
     var levelID: Int!
-    var teamID: Int!
+    var teamID: Int?
+    var team: Team?
     var games: Int
     var atBats: Int
     var singles: Int
@@ -33,6 +34,7 @@ class PlayerStat {
         yearID = dictionary["YearID"] as? Int ?? 0
         levelID = dictionary["LevelID"] as? Int
         teamID = dictionary["TeamID"] as? Int
+        team = TeamRetrievalUtility.sharedInstance.getTeamForId(teamID: teamID)
         games = dictionary["G"] as? Int ?? 0
         atBats = dictionary["AB"] as? Int ?? 0
         singles = dictionary["B1"] as? Int ?? 0

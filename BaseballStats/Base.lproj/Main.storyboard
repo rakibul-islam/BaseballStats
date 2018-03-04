@@ -339,6 +339,15 @@
                                     <constraint firstAttribute="height" constant="20.5" id="gWt-vj-zO3"/>
                                 </constraints>
                             </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVB-21-ECm">
+                                <rect key="frame" x="16" y="418.5" width="343" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="b9l-a7-m3y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -363,14 +372,17 @@
                             <constraint firstItem="WQa-sJ-9WH" firstAttribute="leading" secondItem="eMj-5I-Wxc" secondAttribute="leading" constant="16" id="b6m-UI-8UP"/>
                             <constraint firstItem="LXZ-LC-zYh" firstAttribute="top" secondItem="eMj-5I-Wxc" secondAttribute="top" constant="16" id="bKZ-Tf-b2v"/>
                             <constraint firstItem="18d-0Z-dmh" firstAttribute="top" secondItem="uT7-xU-KQQ" secondAttribute="bottom" constant="2" id="cgA-n7-DZb"/>
+                            <constraint firstItem="eVB-21-ECm" firstAttribute="leading" secondItem="eMj-5I-Wxc" secondAttribute="leading" constant="16" id="fJg-uU-mW7"/>
                             <constraint firstItem="eMj-5I-Wxc" firstAttribute="trailing" secondItem="WQa-sJ-9WH" secondAttribute="trailing" constant="16" id="gWn-G6-Bdu"/>
                             <constraint firstItem="Sse-JT-y4g" firstAttribute="leading" secondItem="eMj-5I-Wxc" secondAttribute="leading" constant="16" id="ged-gq-OD9"/>
                             <constraint firstItem="048-cb-Qs0" firstAttribute="leading" secondItem="Gea-Yh-OeS" secondAttribute="trailing" constant="8" id="hEj-wi-HbF"/>
                             <constraint firstItem="uT7-xU-KQQ" firstAttribute="leading" secondItem="Gea-Yh-OeS" secondAttribute="trailing" constant="8" id="jw8-vr-D2n"/>
                             <constraint firstItem="QQ7-X2-y5l" firstAttribute="leading" secondItem="eMj-5I-Wxc" secondAttribute="leading" constant="16" id="kD3-wy-x2V"/>
                             <constraint firstItem="eMj-5I-Wxc" firstAttribute="trailing" secondItem="n6X-Tx-mTg" secondAttribute="trailing" constant="16" id="lIX-sx-ltm"/>
+                            <constraint firstItem="eMj-5I-Wxc" firstAttribute="trailing" secondItem="eVB-21-ECm" secondAttribute="trailing" constant="16" id="oi2-Gw-JTx"/>
                             <constraint firstItem="eMj-5I-Wxc" firstAttribute="trailing" secondItem="LXZ-LC-zYh" secondAttribute="trailing" constant="16" id="pAR-4x-jzI"/>
                             <constraint firstItem="n6X-Tx-mTg" firstAttribute="leading" secondItem="eMj-5I-Wxc" secondAttribute="leading" constant="16" id="pbZ-S5-qZT"/>
+                            <constraint firstItem="eVB-21-ECm" firstAttribute="top" secondItem="n6X-Tx-mTg" secondAttribute="bottom" constant="40" id="qUx-YA-gRx"/>
                             <constraint firstItem="zfZ-Gg-pyE" firstAttribute="leading" secondItem="Gea-Yh-OeS" secondAttribute="trailing" constant="8" id="qXg-rN-g8W"/>
                             <constraint firstItem="n6X-Tx-mTg" firstAttribute="top" secondItem="rwK-bk-Dh2" secondAttribute="bottom" id="tJr-D7-VNQ"/>
                             <constraint firstItem="ikQ-SO-2kb" firstAttribute="top" secondItem="zfZ-Gg-pyE" secondAttribute="bottom" constant="2" id="u36-mO-Vel"/>
@@ -388,6 +400,7 @@
                         <outlet property="heightWeightLabel" destination="048-cb-Qs0" id="jMb-VB-jzB"/>
                         <outlet property="nameLabel" destination="LXZ-LC-zYh" id="dmc-yf-B55"/>
                         <outlet property="positionLabel" destination="zfZ-Gg-pyE" id="e7j-rB-FT8"/>
+                        <outlet property="previousTeamLabel" destination="eVB-21-ECm" id="KMW-Xm-L42"/>
                         <outlet property="teamNumberLabel" destination="ikQ-SO-2kb" id="X0F-Dg-EzE"/>
                         <outlet property="yearSegmentedControl" destination="Sse-JT-y4g" id="OEE-6C-m0X"/>
                         <outletCollection property="statsLabels" destination="LQA-T5-11D" collectionClass="NSMutableArray" id="kTm-Eg-O4P"/>
