@@ -11,8 +11,8 @@ import UIKit
 class TeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    var team: Team?
-    var selectedPlayer: Player?
+    var team: TeamMO?
+    var selectedPlayer: PlayerMO?
     lazy var playerRetrievalUtility = PlayerRetrievalUtility()
 
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let player = team?.roster?[indexPath.row], let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "playerCell") else { return UITableViewCell() }
+        guard let player = team?.roster?[indexPath.row] as? PlayerMO, let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "playerCell") else { return UITableViewCell() }
         tableViewCell.textLabel?.text = player.displayName
         tableViewCell.detailTextLabel?.text = player.positionName
         return tableViewCell
@@ -48,10 +48,10 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - UITableView delegate methods
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedPlayer = team?.roster?[indexPath.row]
-        if let _ = selectedPlayer?.battingStats {
+        selectedPlayer = team?.roster?[indexPath.row] as? PlayerMO
+        if let battingStats = selectedPlayer?.battingStats, battingStats.count > 0 {
             performSegue(withIdentifier: "showPlayerInfo", sender: nil)
-        } else if let _ = selectedPlayer?.pitchingStats {
+        } else if let pitchingStats = selectedPlayer?.pitchingStats, pitchingStats.count > 0 {
             performSegue(withIdentifier: "showPlayerInfo", sender: nil)
         } else {
             getStatsForSelectedPlayer()
@@ -62,22 +62,18 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Other methods
     func getStatsForSelectedPlayer() {
         CommonAlerts.sharedInstance.showLoadingAlertOn(viewController: self)
-        if let playerID = selectedPlayer?.playerID {
-            playerRetrievalUtility.getStats(for: playerID, completionBlock: { battingStats,pitchingStats  in
-                self.selectedPlayer?.battingStats = battingStats
-                self.selectedPlayer?.pitchingStats = pitchingStats
-                DispatchQueue.main.async {
-                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
-                    })
-                }
-            }, failureBlock: { (error) in
-                DispatchQueue.main.async {
-                    CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
-                    })
-                }
-            })
-        }
+        playerRetrievalUtility.getStats(for: selectedPlayer, completionBlock: {
+            DispatchQueue.main.async {
+                CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                    self.performSegue(withIdentifier: "showPlayerInfo", sender: nil)
+                })
+            }
+        }, failureBlock: { (error) in
+            DispatchQueue.main.async {
+                CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
+                    CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
+                })
+            }
+        })
     }
 }

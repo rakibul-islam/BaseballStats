@@ -1,29 +1,20 @@
 //
-//  Team.swift
+//  TeamMO+Extension.swift
 //  BaseballStats
 //
-//  Created by Rakibul Islam on 3/3/18.
+//  Created by Rakibul Islam on 3/4/18.
 //  Copyright © 2018 Rakibul Islam. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class Team {
-    var teamID: Int
-    var city: String?
-    var name: String?
-    var abbreviation: String?
-    var leagueID: Int
-    var fullName: String?
-    
-    var roster: [Player]?
-    
-    init(dictionary: [String: Any]) {
-        teamID = dictionary["TeamID"] as? Int ?? 0
+extension TeamMO {
+    func setupTeamFrom(dictionary: [String: Any]) {
+        teamID = dictionary["TeamID"] as? Int16 ?? 0
         city = dictionary["City"] as? String
         name = dictionary["Name"] as? String
         abbreviation = dictionary["Abbr"] as? String
-        leagueID = dictionary["LeagueID"] as? Int ?? 0
+        leagueID = dictionary["LeagueID"] as? Int16 ?? 0
         fullName = dictionary["FullName"] as? String
     }
     

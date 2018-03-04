@@ -10,15 +10,23 @@ import XCTest
 @testable import BaseballStats
 
 class TeamTestCases: XCTestCase {
-    let dictionary: [String : Any] = ["TeamID": 1,
+    let dictionary: [String : Any] = ["TeamID": Int16(1),
                                       "City": "New York",
                                       "Name": "Yankees",
                                       "Abbr": "NYA",
-                                      "LeagueID": 1,
+                                      "LeagueID": Int16(1),
                                       "FullName": "New York Yankees"]
+    var coreDataController: CoreDataController!
+    
+    override func setUp() {
+        super.setUp()
+        coreDataController = CoreDataController.sharedInstance
+        coreDataController.setupInMemoryManagedObjectContext()
+    }
     
     func testTeamInit_withDictionary_shouldSetValues() {
-        let team = Team(dictionary: dictionary)
+        let team = coreDataController.createTeamEntity()
+        team.setupTeamFrom(dictionary: dictionary)
         XCTAssertEqual(team.teamID, 1)
         XCTAssertEqual(team.city, "New York")
         XCTAssertEqual(team.name, "Yankees")
@@ -28,7 +36,7 @@ class TeamTestCases: XCTestCase {
     }
     
     func testTeamInit_withEmptyDictionary_shouldSetValues() {
-        let team = Team(dictionary: [:])
+        let team = coreDataController.createTeamEntity()
         XCTAssertEqual(team.teamID, 0)
         XCTAssertNil(team.city)
         XCTAssertNil(team.name)
@@ -38,18 +46,18 @@ class TeamTestCases: XCTestCase {
     }
     
     func testLeague_withLeagueID0_shouldReturnUnknown() {
-        let team = Team(dictionary: [:]) //team.leagueID is defaulted to 0
+        let team = coreDataController.createTeamEntity() //team.leagueID is defaulted to 0
         XCTAssertEqual(team.league, "Unknown")
     }
     
     func testLeage_withLeagueID1_shouldReturnAmericanLeague() {
-        let team = Team(dictionary: [:])
+        let team = coreDataController.createTeamEntity()
         team.leagueID = 1
         XCTAssertEqual(team.league, "American League")
     }
     
     func testLeage_withLeagueID2_shouldReturnNationalLeague() {
-        let team = Team(dictionary: [:])
+        let team = coreDataController.createTeamEntity()
         team.leagueID = 2
         XCTAssertEqual(team.league, "National League")
     }
