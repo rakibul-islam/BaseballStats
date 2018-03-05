@@ -8,7 +8,13 @@
 
 import UIKit
 
-class PlayerRetrievalUtility: NSObject {
+protocol PlayerRetrievalUtilityProtocol {
+    func getPlayersWith(searchParameter: String, completionBlock: @escaping ([PlayerMO]) -> Void, failureBlock: @escaping (Error) -> Void)
+    func getStats(for player: PlayerMO?, completionBlock: @escaping () -> Void, failureBlock: @escaping (Error) -> Void)
+    func loadImageFrom(urlString: String?, completionHandler: @escaping (UIImage?) -> Void)
+}
+
+class PlayerRetrievalUtility: PlayerRetrievalUtilityProtocol {
     let baseURL = "https://jobposting28.azurewebsites.net/api/"
     var coreDataController = CoreDataController.sharedInstance
     
@@ -76,7 +82,6 @@ class PlayerRetrievalUtility: NSObject {
             }
         }
     }
-    
     
     func loadImageFrom(urlString: String?, completionHandler: @escaping (UIImage?) -> Void) {
         if let string = urlString, let url = URL(string: string) {

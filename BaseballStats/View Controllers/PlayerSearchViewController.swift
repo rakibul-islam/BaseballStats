@@ -15,7 +15,7 @@ class PlayerSearchViewController: UIViewController, UISearchBarDelegate, UITable
     var players = [PlayerMO]()
     var selectedPlayer: PlayerMO?
     
-    lazy var playerRetrievalUtility = PlayerRetrievalUtility()
+    lazy var playerRetrievalUtility: PlayerRetrievalUtilityProtocol = PlayerRetrievalUtility()
 
     override func viewDidLoad() {
         super.viewDidLoad()
