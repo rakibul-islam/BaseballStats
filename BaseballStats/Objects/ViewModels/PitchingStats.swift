@@ -16,7 +16,7 @@ class PitchingStats: PlayerStat {
             guard let pitchingObject = managedObject as? PitchingStatMO else {
                 return nil
             }
-            return NumberFormatters.pitchingNumberFormatter.string(from: NSNumber(value: pitchingObject.getERA()))
+            return NumberFormatters.pitchingNumberFormatter.string(from: NSNumber(value: pitchingObject.era))
         }
     }
     
@@ -30,10 +30,10 @@ class PitchingStats: PlayerStat {
                 "\(pitchingObject.wins)",
                 "\(pitchingObject.losses)",
                 "\(pitchingObject.saves)",
-                "\(pitchingObject.getInningsPitched())",
-                "\(pitchingObject.getHits())",
+                "\(pitchingObject.inningsPitched)",
+                "\(pitchingObject.hits)",
                 "\(pitchingObject.strikeouts)",
-                "\(pitchingObject.getWalks())",
+                "\(pitchingObject.walks)",
                 eraString]
         }
     }

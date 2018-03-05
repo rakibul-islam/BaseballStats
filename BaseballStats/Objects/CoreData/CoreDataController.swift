@@ -87,6 +87,8 @@ class CoreDataController {
         }
     }
     
+    //MARK: - Add objects from dictionary methods
+    
     func addTeamFrom(dictionary: [String: Any]) {
         let teamMO = getTeamFor(team: dictionary["TeamID"]) ?? createTeamEntity()
         teamMO.setupTeamFrom(dictionary: dictionary)
@@ -121,6 +123,14 @@ class CoreDataController {
         pitchingStatMO.team = getTeamFor(team: dictionary["TeamID"])
         saveContext()
     }
+    
+    //MARK: - Other save methods
+    func bookmark(player: PlayerMO) {
+        player.bookmarked = !player.bookmarked
+        saveContext()
+    }
+    
+    //MARK: - Get objects methods
     
     func getAllTeams() -> [TeamMO] {
         let teamFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team")
@@ -168,6 +178,19 @@ class CoreDataController {
         return nil
     }
     
+    func getBookmarkedPlayers() -> [PlayerMO] {
+        let playerFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
+        playerFetchRequest.predicate = NSPredicate(format: "bookmarked == true")
+        do {
+            if let fetchResult = try managedObjectContext.fetch(playerFetchRequest) as? [PlayerMO] {
+                return fetchResult
+            }
+        } catch {
+            return []
+        }
+        return []
+    }
+    
     func getBattingStatFor(player: PlayerMO, for year: Any?, with team: Any?) -> BattingStatMO? {
         guard let yearID = year as? Int16, let teamID = team as? Int16 else {
             return nil
@@ -199,6 +222,8 @@ class CoreDataController {
         }
         return nil
     }
+    
+    //MARK: - Create entity methods
     
     func createTeamEntity() -> TeamMO {
         return NSEntityDescription.insertNewObject(forEntityName: "Team", into: self.managedObjectContext) as! TeamMO

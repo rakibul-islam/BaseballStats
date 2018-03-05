@@ -9,6 +9,7 @@
 import UIKit
 
 class PlayerStatsViewController: UIViewController {
+    @IBOutlet weak var bookmarkBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var headshotImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var positionLabel: UILabel!
@@ -30,11 +31,11 @@ class PlayerStatsViewController: UIViewController {
     var viewModelArray = [PlayerStat]()
     
     lazy var playerRetrievalUtility = PlayerRetrievalUtility()
+    lazy var coreDataController = CoreDataController.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        title = "Player Info"
         nameLabel.text = player?.displayName
         positionLabel.text = player?.positionName
         teamNumberLabel.text = player?.teamAndNumber
@@ -73,6 +74,13 @@ class PlayerStatsViewController: UIViewController {
         displayStats()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let bookmarked = player?.bookmarked {
+            bookmarkBarButtonItem.title = bookmarked ? "Remove" : "Save"
+        }
+    }
+    
     func displayStats() {
         if viewModelArray.count > 0 {
             let numberOfSegments = min(viewModelArray.count, 3)
@@ -98,6 +106,13 @@ class PlayerStatsViewController: UIViewController {
                 previousTeamLabel.isHidden = currentTeamId == stats.managedObject.teamID
                 previousTeamLabel.text = "Member of: \(oldTeamName)"
             }
+        }
+    }
+    
+    @IBAction func bookmarkButtonTapped(_ sender: Any) {
+        if let playerToBookmark = player {
+            coreDataController.bookmark(player: playerToBookmark)
+            bookmarkBarButtonItem.title = playerToBookmark.bookmarked ? "Remove" : "Save"
         }
     }
 }

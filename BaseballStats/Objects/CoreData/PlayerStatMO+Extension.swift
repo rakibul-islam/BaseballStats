@@ -30,11 +30,15 @@ extension PlayerStatMO {
         runs = dictionary["R"] as? Int16 ?? 0
     }
     
-    func getHits() -> Int16 {
-        return singles + doubles + triples + homeRuns
+    var hits: Int16 {
+        get {
+            return singles + doubles + triples + homeRuns
+        }
     }
     
-    func getWalks() -> Int16 {
-        return walksRegular + walksIntentional
+    var walks: Int16 {
+        get {
+            return walksRegular + walksIntentional
+        }
     }
 }
