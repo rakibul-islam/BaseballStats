@@ -33,6 +33,9 @@ extension PitchingStatMO {
     
     var era: Float {
         get {
+            guard outs > 0 else {
+                return 0
+            }
             return Float(earnedRuns * 27) / Float(outs)
         }
     }
