@@ -83,7 +83,11 @@ class TeamListViewController: UITableViewController {
         }, failureBlock: { (error) in
             DispatchQueue.main.async {
                 CommonAlerts.sharedInstance.dismissLoadingAlert(completionBlock: {
-                    CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
+                    if let roster = team.roster, roster.count > 0 {
+                        self.performSegue(withIdentifier: "showTeamRoster", sender: nil)
+                    } else {
+                        CommonAlerts.showErrorAlertOn(viewController: self, messageString: nil, error: error)
+                    }
                 })
             }
         })

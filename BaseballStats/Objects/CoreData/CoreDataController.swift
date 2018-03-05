@@ -180,7 +180,7 @@ class CoreDataController {
     
     func getBookmarkedPlayers() -> [PlayerMO] {
         let playerFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
-        playerFetchRequest.predicate = NSPredicate(format: "bookmarked == YES")
+        playerFetchRequest.predicate = NSPredicate(format: "bookmarked == true")
         do {
             if let fetchResult = try managedObjectContext.fetch(playerFetchRequest) as? [PlayerMO] {
                 return fetchResult
