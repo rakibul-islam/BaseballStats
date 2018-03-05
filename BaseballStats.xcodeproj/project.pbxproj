@@ -12,6 +12,7 @@
 		F201ED0A204C803600B3BAC5 /* PlayerStatMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED09204C803600B3BAC5 /* PlayerStatMO+Extension.swift */; };
 		F201ED0C204C833A00B3BAC5 /* BattingStatsMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED0B204C833A00B3BAC5 /* BattingStatsMO+Extension.swift */; };
 		F201ED0E204C857100B3BAC5 /* PitchingStatMO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F201ED0D204C857100B3BAC5 /* PitchingStatMO+Extension.swift */; };
+		F247BC64204CE30B003C93BC /* PitchingStatTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F247BC63204CE30B003C93BC /* PitchingStatTestCases.swift */; };
 		F264E531204902E30032ABDE /* BattingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264E530204902E30032ABDE /* BattingStats.swift */; };
 		F26ADD47204A80E3009B33CF /* TeamRetrievalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD46204A80E3009B33CF /* TeamRetrievalUtility.swift */; };
 		F26ADD49204B7782009B33CF /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD48204B7782009B33CF /* TeamViewController.swift */; };
@@ -23,6 +24,7 @@
 		F26ADD59204BBFF3009B33CF /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26ADD58204BBFF3009B33CF /* CoreDataController.swift */; };
 		F272293D204A1B9F00597B37 /* PlayerStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */; };
 		F2DD6ABF204CB4420043BC29 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD6ABE204CB4420043BC29 /* BookmarksViewController.swift */; };
+		F2DD6AC3204CD72D0043BC29 /* BattingStatTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD6AC2204CD72D0043BC29 /* BattingStatTestCases.swift */; };
 		F2E2EB5C2048DA2D00DA213A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */; };
 		F2E2EB5E2048DA2D00DA213A /* PlayerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5D2048DA2D00DA213A /* PlayerSearchViewController.swift */; };
 		F2E2EB602048DA2D00DA213A /* TeamListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2EB5F2048DA2D00DA213A /* TeamListViewController.swift */; };
@@ -50,6 +52,7 @@
 		F201ED09204C803600B3BAC5 /* PlayerStatMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerStatMO+Extension.swift"; sourceTree = "<group>"; };
 		F201ED0B204C833A00B3BAC5 /* BattingStatsMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BattingStatsMO+Extension.swift"; sourceTree = "<group>"; };
 		F201ED0D204C857100B3BAC5 /* PitchingStatMO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PitchingStatMO+Extension.swift"; sourceTree = "<group>"; };
+		F247BC63204CE30B003C93BC /* PitchingStatTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingStatTestCases.swift; sourceTree = "<group>"; };
 		F264E530204902E30032ABDE /* BattingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattingStats.swift; sourceTree = "<group>"; };
 		F26ADD46204A80E3009B33CF /* TeamRetrievalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRetrievalUtility.swift; sourceTree = "<group>"; };
 		F26ADD48204B7782009B33CF /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 		F26ADD58204BBFF3009B33CF /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		F272293C204A1B9F00597B37 /* PlayerStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsViewController.swift; sourceTree = "<group>"; };
 		F2DD6ABE204CB4420043BC29 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
+		F2DD6AC2204CD72D0043BC29 /* BattingStatTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattingStatTestCases.swift; sourceTree = "<group>"; };
 		F2E2EB582048DA2D00DA213A /* BaseballStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E2EB5B2048DA2D00DA213A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2E2EB5D2048DA2D00DA213A /* PlayerSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSearchViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 				F2E2EB742048DA2D00DA213A /* Info.plist */,
 				F26ADD4F204BA93F009B33CF /* TeamTestCases.swift */,
 				F26ADD51204BADBE009B33CF /* PlayerTestCases.swift */,
+				F2DD6AC2204CD72D0043BC29 /* BattingStatTestCases.swift */,
+				F247BC63204CE30B003C93BC /* PitchingStatTestCases.swift */,
 			);
 			path = BaseballStatsTests;
 			sourceTree = "<group>";
@@ -339,8 +345,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2DD6AC3204CD72D0043BC29 /* BattingStatTestCases.swift in Sources */,
 				F26ADD52204BADBE009B33CF /* PlayerTestCases.swift in Sources */,
 				F26ADD50204BA93F009B33CF /* TeamTestCases.swift in Sources */,
+				F247BC64204CE30B003C93BC /* PitchingStatTestCases.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
